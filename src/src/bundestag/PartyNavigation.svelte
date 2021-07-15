@@ -1,7 +1,8 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
   import * as d3 from "d3";
-
+  import CheckboxBlankOutline from "svelte-material-icons/CheckboxBlankOutline.svelte";
+  import CheckboxMarked from "svelte-material-icons/CheckboxMarked.svelte";
   const dispatcher = createEventDispatcher();
 
   export let data;
@@ -77,11 +78,17 @@
           class="link active"
           on:click={() => onToggle(party.partei_id, party.link)}
         >
-          {party.name}
+          <div style="float: left; margin-right: 12px;">
+            <CheckboxMarked height="32" width="32" />
+          </div>
+          <div style="padding-top: 6px;">{party.name}</div>
         </li>
       {:else}
         <li class="link" on:click={() => onToggle(party.partei_id, party.link)}>
-          {party.name}
+          <div style="float: left; margin-right: 12px;">
+            <CheckboxBlankOutline height="32" width="32" />
+          </div>
+          <div style="padding-top: 6px;">{party.name}</div>
         </li>
       {/if}
     {/each}
@@ -98,7 +105,7 @@
   .link {
     display: block;
     color: #000;
-    padding: 10px 16px;
+    padding: 8px 10px 12px 10px;
     text-decoration: none;
     cursor: pointer;
   }
@@ -109,8 +116,8 @@
   }
 
   .active {
-    background-color: rgb(8, 8, 102);
-    color: white;
+    color: rgb(8, 8, 102);
+    background-color: white;
     font-weight: bold;
   }
 </style>

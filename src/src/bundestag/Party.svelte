@@ -1,23 +1,54 @@
 <script>
-  import { Link } from "svelte-navigator";
+  import PartyNavigation from "./PartyNavigation.svelte";
+  import PartyOverview from "./PartyOverview.svelte";
 
-  export let data;
+  export let parties;
   export let mps;
-  export let link;
+  let selectedMPs = [];
 
-  let party_data;
-  $: party_data = [...data.filter((d) => d.link === link)][0];
-  let party_mps;
-  $: party_mps = [...mps.filter(d => d.party === link)] // TODO: party !== party link
+  parties.forEach((element) => (element["selected"] = false));
+
+  function toggleParty(event) {
+    let selected = parties.find(
+      (element) => element.partei_id === event.detail
+    ).selected;
+    parties.find((element) => element.partei_id === event.detail)["selected"] =
+      !selected;
+    parties = [...parties];
+    let filtered = parties
+      .filter((element) => element.selected)
+      .map((element) => element.partei_id);
+    console.log(filtered);
+    selectedMPs = mps.filter((element) =>
+      filtered.find((x) => x === element.partei_id)
+    );
+    selectedMPs = [...selectedMPs];
+  }
+
+  function partySelected(party) {
+    let selectedParty = parties.find((element) => element.partei_id === party);
+    return selectedParty === undefined ? false : selectedParty.selected;
+  }
 </script>
 
-<h1>
-  {party_data.name}
-</h1>
+<div style="display: flex;">
+  <div class="navigation">
+    <PartyNavigation
+      data={parties}
+      {partySelected}
+      on:on-toggle={toggleParty}
+    />
+  </div>
+  <div style="width: 100%">
+    {#if parties.find((element) => element.selected === true) !== undefined}
+      <PartyOverview mps={selectedMPs} />
+    {/if}
+  </div>
+</div>
 
-<h2>Abgeordnete</h2>
-<ul>
-  {#each party_mps as mp}
-    <Link to="/profile/{mp.id}"><li>{mp.nachname}, {mp.vorname}</li></Link>
-  {/each}
-</ul>
+<style>
+  .navigation {
+    width: 300;
+  }
+  
+</style>

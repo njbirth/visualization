@@ -14,6 +14,7 @@
   let data = [
     {
       name: "fraktionslos",
+      partei_id: "fraktionslos",
       link: "fraktionslos",
       seats: 10,
       color: "gray",
@@ -21,6 +22,7 @@
     },
     {
       name: "DIE LINKE.",
+      partei_id: "DIE LINKE.",
       link: "linke",
       seats: 69,
       color: "magenta",
@@ -28,6 +30,7 @@
     },
     {
       name: "SPD",
+      partei_id: "SPD",
       link: "spd",
       seats: 152,
       color: "red",
@@ -35,6 +38,7 @@
     },
     {
       name: "Bündnis 90/Die Grünen",
+      partei_id: "BÜNDNIS 90/DIE GRÜNEN",
       link: "gruene",
       seats: 67,
       color: "green",
@@ -42,6 +46,7 @@
     },
     {
       name: "CDU/CSU",
+      partei_id: "CDU/CSU",
       link: "cdu-csu",
       seats: 245,
       color: "black",
@@ -49,6 +54,7 @@
     },
     {
       name: "FDP",
+      partei_id: "FDP",
       link: "fdp",
       seats: 80,
       color: "#feed00",
@@ -56,6 +62,7 @@
     },
     {
       name: "AfD",
+      partei_id: "AfD",
       link: "afd",
       seats: 86,
       color: "#00a2e0",
@@ -68,15 +75,12 @@
 <Router>
   <Header />
   <div style="display: flex;">
-    <!-- <Navigation /> -->
-    <PartyNavigation {data} />
     <main>
-      <Route path="/" />
       <Route path="/profile/:id" let:params>
         <MpProfile name={params.id} />
       </Route>
-      <Route path="/party/:link" let:params>
-        <Party {data} {mps} link={params.link} />
+        <Route path="/" let:params>
+          <Party parties={data} {mps} />
       </Route>
     </main>
   </div>
@@ -84,6 +88,6 @@
 
 <style>
   main {
-    margin: 1em;
+    width: 100%;
   }
 </style>

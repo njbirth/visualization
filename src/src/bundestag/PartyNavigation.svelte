@@ -1,12 +1,21 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
   import * as d3 from "d3";
-  import { Link, navigate } from "svelte-navigator";
+
+  const dispatcher = createEventDispatcher();
+
+  export let data;
+  export let partySelected;
+
+  function onToggle(party, link) {
+    dispatcher("on-toggle", party);
+    d3.select("#party" + link).style(
+      "scale",
+      partySelected(party) ? "1.1" : "1.0"
+    );
+  }
 
   let pieDiv;
-  let selected; // selected party link
-  export let data;
-
   onMount(() => {
     let pie = d3
       .pie()
@@ -20,6 +29,7 @@
     let arcData = pie(seats);
     arcData.forEach((element, i) => {
       element["name"] = data[i].name;
+      element["partei_id"] = data[i].partei_id;
       element["color"] = data[i].color;
       element["link"] = data[i].link;
     });
@@ -35,51 +45,39 @@
       .style("fill", (d) => d.color)
       .style("stroke", "white")
       .style("stroke-linecap", "round")
+      .style("scale", (d) => (partySelected(d.partei_id) ? "1.1" : "1.0"))
       .attr("d", arc)
       .attr("cursor", "pointer")
       .attr("id", (d) => "party" + d.link)
       .on("click", (d) => {
-        if (selected !== d.target.__data__.link) {
-          if (selected !== undefined)
-            d3.select("#party" + selected).style("scale", "1.0");
-          selected = d.target.__data__.link;
-        }
-        let link = d.target.__data__.link;
-        navigate("/party/" + link, { replace: true });
+        onToggle(d.target.__data__.partei_id, d.target.__data__.link);
       })
       .on("mouseover", (d) => {
         d3.select(d.target).style("scale", "1.1");
       })
       .on("mouseout", (d) => {
-        if (selected === undefined || selected !== d.target.__data__.link)
+        if (!partySelected(d.target.__data__.partei_id))
           d3.select(d.target).style("scale", "1.0");
       });
   });
-  function selectParty(party) {
-    if (selected !== undefined)
-      d3.select("#party" + selected).style("scale", "1.0");
-    selected = party;
-    d3.select("#party" + selected).style("scale", "1.1");
-  }
 </script>
 
 <div>
   <svg bind:this={pieDiv} width="300" height="200" />
   <ul>
     {#each data.sort((a, b) => a.seats < b.seats) as party}
-      <Link
-        to="/party/{party.link}"
-        on:click={() => {
-          selectParty(party.link);
-          console.log(selected);
-        }}
-      >
-        {#if selected === party.link}
-          <li class="link active">{party.name}</li>
-        {:else}
-          <li class="link">{party.name}</li>
-        {/if}
-      </Link>
+      {#if partySelected(party.partei_id)}
+        <li
+          class="link active"
+          on:click={() => onToggle(party.partei_id, party.link)}
+        >
+          {party.name}
+        </li>
+      {:else}
+        <li class="link" on:click={() => onToggle(party.partei_id, party.link)}>
+          {party.name}
+        </li>
+      {/if}
     {/each}
   </ul>
 </div>
@@ -96,6 +94,7 @@
     color: #000;
     padding: 10px 16px;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .link:hover {

@@ -1,30 +1,41 @@
 <script>
-  import { Link } from "svelte-navigator";
-
+  import { createEventDispatcher } from "svelte";
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
   export let mps;
+
+  const dispatcher = createEventDispatcher();
+
+  function onSelectMP(mp) {
+    console.log(mp);
+    dispatcher("select-mp", mp);
+  }
 </script>
 
 <div class="container">
   <div class="item right-border margin">
     <h1>Abgeordnete</h1>
 
-    <div class="container">
+    <div class="container" style="height: 79vh; overflow: auto;">
       <div class="item">
         <ul>
           {#each mps.slice(0, mps.length / 2) as mp}
-            <Link to="profile/{mp.id}"
-              ><li>{mp.nachname}, {mp.vorname}, ({mp.partei})</li></Link
-            >
+            <li>
+              <span class="link clickable" on:click={() => onSelectMP(mp)}
+                >{mp.nachname}, {mp.vorname}, ({mp.partei})</span
+              >
+            </li>
           {/each}
         </ul>
       </div>
       <div class="item">
         <ul>
           {#each mps.slice(mps.length / 2 + 1, mps.length) as mp}
-            <Link to="profile/{mp.id}"
-              ><li>{mp.nachname}, {mp.vorname}, ({mp.partei})</li></Link
-            >
+            <li>
+              <span class="link clickable" on:click={() => onSelectMP(mp)}>
+                {mp.nachname}, {mp.akad_titel ? mp.akad_titel : ""}
+                {mp.vorname}, ({mp.partei})</span
+              >
+            </li>
           {/each}
         </ul>
       </div>
@@ -66,6 +77,19 @@
   }
   .margin {
     margin: 1em;
+  }
+  .link {
+    color: rgb(0, 100, 200);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+  }
+
+  .link:visited {
+    color: rgb(0, 80, 160);
   }
   .right-border {
     border-right: 3px dotted #ccc;

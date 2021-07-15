@@ -25,7 +25,7 @@
 
     let arc = d3.arc().innerRadius(20).outerRadius(100);
 
-    let seats = data.sort((a, b) => a.order > b.order).map((d) => d.seats);
+    let seats = data.sort((a, b) => a.order - b.order).map((d) => d.seats);
     let arcData = pie(seats);
     arcData.forEach((element, i) => {
       element["name"] = data[i].name;
@@ -65,7 +65,7 @@
 <div>
   <svg bind:this={pieDiv} width="300" height="200" />
   <ul>
-    {#each data.sort((a, b) => a.seats < b.seats) as party}
+    {#each data.sort((a, b) => b.seats - a.seats) as party}
       {#if partySelected(party.partei_id)}
         <li
           class="link active"

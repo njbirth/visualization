@@ -38,7 +38,7 @@
     },
     {
       name: "Bündnis 90/Die Grünen",
-      partei_id: "BÜNDNIS 90/DIE GRÜNEN",
+      partei_id: "GRÜNE",
       link: "gruene",
       seats: 67,
       color: "green",

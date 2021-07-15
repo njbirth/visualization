@@ -9,9 +9,9 @@
 
   function onToggle(party, link) {
     dispatcher("on-toggle", party);
-    d3.select("#party" + link).style(
-      "scale",
-      partySelected(party) ? "1.1" : "1.0"
+    d3.select("#party" + link).attr(
+      "transform",
+      partySelected(party) ? "scale(1.1)" : "scale(1.0)"
     );
   }
 
@@ -38,26 +38,32 @@
       .select(pieDiv)
       .append("g")
       .attr("transform", "translate(150, 125)")
-      .selectAll("path")
+      .selectAll("g")
       .data(arcData)
       .enter()
+      .append("g")
+      .attr("transform", (d) =>
+        partySelected(d.partei_id) ? "scale(1.1)" : "scale(1.0)"
+      )
+      .attr("id", (d) => "party" + d.link)
       .append("path")
       .style("fill", (d) => d.color)
       .style("stroke", "white")
       .style("stroke-linecap", "round")
-      .style("scale", (d) => (partySelected(d.partei_id) ? "1.1" : "1.0"))
       .attr("d", arc)
       .attr("cursor", "pointer")
-      .attr("id", (d) => "party" + d.link)
       .on("click", (d) => {
         onToggle(d.target.__data__.partei_id, d.target.__data__.link);
       })
       .on("mouseover", (d) => {
-        d3.select(d.target).style("scale", "1.1");
+        console.log(d);
+        d3.select(d.target.parentNode).attr("transform", "scale(1.1)");
       })
       .on("mouseout", (d) => {
+        console.log(d);
+
         if (!partySelected(d.target.__data__.partei_id))
-          d3.select(d.target).style("scale", "1.0");
+          d3.select(d.target.parentNode).attr("transform", "scale(1.0)");
       });
   });
 </script>

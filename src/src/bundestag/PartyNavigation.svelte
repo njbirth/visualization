@@ -15,7 +15,7 @@
       .select("path")
       .style("fill", (d) =>
         partySelected(d.partei_id) ? d.color : d.colorDeselect
-    );
+      );
   }
 
   let pieDiv;

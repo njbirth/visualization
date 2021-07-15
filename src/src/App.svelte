@@ -1,8 +1,6 @@
 <script>
   import Header from "./ui/Header.svelte";
   import { Router, Route, Link } from "svelte-navigator";
-  import MpProfile from "./bundestag/Profile.svelte";
-  import PartyNavigation from "./bundestag/PartyNavigation.svelte";
   import Party from "./bundestag/Party.svelte";
 
   import mps from "../../data/___final/stammdaten.json";
@@ -11,7 +9,7 @@
     let name2 = b.nachname + b.vorname;
     return name1.localeCompare(name2);
   });
-  
+
   let data = [
     {
       name: "fraktionslos",
@@ -64,7 +62,7 @@
       link: "fdp",
       seats: 80,
       color: "#ffee00",
-      colorDeselect:  "#ffee70", 
+      colorDeselect: "#ffee70",
       order: 5,
     },
     {
@@ -81,15 +79,12 @@
 
 <Router>
   <Header />
-  <div style="display: flex;">
-    <main>
-        <Route path="profile/:id" let:params>
-      </Route>
-        <Route path="" let:params>
-          <Party parties={data} {mps} />
-      </Route>
-    </main>
-  </div>
+  <main>
+    <Route>
+      <Party parties={data} {mps} />
+    </Route>
+    <Route path="statistics">Test</Route>
+  </main>
 </Router>
 
 <style>

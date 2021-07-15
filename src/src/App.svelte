@@ -5,6 +5,12 @@
   import PartyNavigation from "./bundestag/PartyNavigation.svelte";
   import Party from "./bundestag/Party.svelte";
 
+  import mps from "../../data/___final/stammdaten.json";
+  mps.sort((a, b) => {
+    let name1 = a.nachname + a.vorname;
+    let name2 = b.nachname + b.vorname;
+    return name1.localeCompare(name2)});
+  
   let data = [
     {
       name: "fraktionslos",
@@ -57,7 +63,6 @@
     },
   ];
 
-  let mps = [];
 </script>
 
 <Router>

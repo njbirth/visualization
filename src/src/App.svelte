@@ -76,10 +76,9 @@
   <Header />
   <div style="display: flex;">
     <main>
-      <Route path="/profile/:id" let:params>
-        <MpProfile name={params.id} />
+        <Route path="profile/:id" let:params>
       </Route>
-        <Route path="/" let:params>
+        <Route path="" let:params>
           <Party parties={data} {mps} />
       </Route>
     </main>

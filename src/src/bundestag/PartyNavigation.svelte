@@ -18,6 +18,26 @@
       );
   }
 
+  function onSelectAll() {
+    dispatcher("select-all");
+    data.forEach((element) => {
+      d3.select("#party" + element.link)
+        .attr("transform", "scale(1.1)")
+        .select("path")
+        .style("fill", (d) => d.color);
+    });
+  }
+
+  function onDeselectAll() {
+    dispatcher("deselect-all");
+    data.forEach((element) => {
+      d3.select("#party" + element.link)
+        .attr("transform", "scale(1.0)")
+        .select("path")
+        .style("fill", (d) => d.colorDeselect);
+    });
+  }
+
   let pieDiv;
   onMount(() => {
     let pie = d3
@@ -98,6 +118,8 @@
       {/if}
     {/each}
   </ul>
+  <button on:click={onSelectAll}>Alle markieren</button>
+  <button on:click={onDeselectAll}>Reset</button>
 </div>
 
 <style>

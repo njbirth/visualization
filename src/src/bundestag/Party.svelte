@@ -32,7 +32,6 @@
     let filtered = parties
       .filter((element) => element.selected)
       .map((element) => element.partei_id);
-    console.log(filtered);
     selectedMPs = mps.filter((element) =>
       filtered.find((x) => x === element.partei_id)
     );
@@ -49,6 +48,20 @@
       data={parties}
       {partySelected}
       on:on-toggle={toggleParty}
+      on:select-all={() => {
+        parties.forEach((element) => {
+          element["selected"] = true;
+        });
+        parties = [...parties];
+        update();
+      }}
+      on:deselect-all={() => {
+        parties.forEach((element) => {
+          element["selected"] = false;
+        });
+        parties = [...parties];
+        update();
+      }}
     />
   </div>
   <div style="width: 100%">

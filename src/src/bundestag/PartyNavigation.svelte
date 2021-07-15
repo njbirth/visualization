@@ -10,9 +10,11 @@
 
   function onToggle(party, link) {
     dispatcher("on-toggle", party);
-    d3.select("#party" + link).attr(
-      "transform",
-      partySelected(party) ? "scale(1.1)" : "scale(1.0)"
+    d3.select("#party" + link)
+      .attr("transform", partySelected(party) ? "scale(1.1)" : "scale(1.0)")
+      .select("path")
+      .style("fill", (d) =>
+        partySelected(d.partei_id) ? d.color : d.colorDeselect
     );
   }
 
@@ -32,6 +34,7 @@
       element["name"] = data[i].name;
       element["partei_id"] = data[i].partei_id;
       element["color"] = data[i].color;
+      element["colorDeselect"] = data[i].colorDeselect;
       element["link"] = data[i].link;
     });
 
@@ -48,7 +51,9 @@
       )
       .attr("id", (d) => "party" + d.link)
       .append("path")
-      .style("fill", (d) => d.color)
+      .style("fill", (d) =>
+        partySelected(d.partei_id) ? d.color : d.colorDeselect
+      )
       .style("stroke", "white")
       .style("stroke-linecap", "round")
       .attr("d", arc)

@@ -149,6 +149,6 @@
   }
 
   button {
-    cursor: pointer;
+    margin-left: 10px;
   }
 </style>

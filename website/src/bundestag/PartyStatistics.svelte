@@ -1,5 +1,6 @@
 <script>
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
+  import Sitzverteilung from "./statistics/Sitzverteilung.svelte";
 
   export let mps;
   export let parties;
@@ -14,6 +15,7 @@
   </TabList>
 
   <TabPanel>
+    <Sitzverteilung {parties} {mps} {selected} />
   </TabPanel>
 
   <TabPanel>

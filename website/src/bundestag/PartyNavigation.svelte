@@ -75,7 +75,6 @@
         partySelected(d.partei_id) ? d.color : d.colorDeselect
       )
       .style("stroke", "white")
-      .style("stroke-linecap", "round")
       .attr("d", arc)
       .attr("cursor", "pointer")
       .on("click", (d) => {

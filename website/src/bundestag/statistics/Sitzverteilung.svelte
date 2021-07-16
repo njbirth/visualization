@@ -8,6 +8,8 @@
   export let selected;
 
   function getColors(parties, labels, selected) {
+    console.log(parties)
+    parties.sort((a, b) => b.seats - a.seats);
     let partyColors = extractPartyIdentifiers(parties, "color");
     let partyColorsAlpha = partyColors.map((color) => α(color, 0.7));
     let partyColorsDeselect = extractPartyIdentifiers(parties, "colorDeselect");
@@ -30,14 +32,17 @@
   }
 
   $: parties.sort((a, b) => b.seats - a.seats);
-  let partyIdentifiers = extractPartyIdentifiers(parties);
-  let partyLabels = extractPartyIdentifiers(parties, "partei_id");
+  let partyIdentifiers;
+  $: partyIdentifiers = extractPartyIdentifiers(parties);
+  let partyLabels;
+  $: partyLabels = extractPartyIdentifiers(parties, "name");
 
-  let colors = getColors(parties, partyLabels, selected);
+  let colors = [];
 
-  $: colors = getColors(parties, partyLabels, selected);
+  $: colors = getColors(parties, partyIdentifiers, selected);
 
-  let partySeats = extractPartyIdentifiers(parties, "seats");
+  let partySeats;
+  $: partySeats = extractPartyIdentifiers(parties, "seats");
   // let partySeats = partyIdentifiers.map((element) => {
   //   extractPartySeats(mps, element);
   // });

@@ -7,8 +7,8 @@
   export let parties;
   export let mps;
 
-  // Array of MPs which are listed.
-  let selectedMPs = [];
+  // Array of selected parties.
+  let selected = [];
 
   parties.forEach((element) => (element["selected"] = true));
   update();
@@ -29,13 +29,9 @@
   }
 
   function update() {
-    let filtered = parties
+    selected = parties
       .filter((element) => element.selected)
       .map((element) => element.partei_id);
-    selectedMPs = mps.filter((element) =>
-      filtered.find((x) => x === element.partei_id)
-    );
-    selectedMPs = [...selectedMPs];
   }
 
   // Selected MP for showing modal
@@ -66,7 +62,9 @@
   </div>
   <div style="width: 100%">
     <PartyOverview
-      mps={selectedMPs}
+      {mps}
+      {selected}
+      {parties}
       on:select-mp={(event) => (mp = event.detail)}
     />
   </div>

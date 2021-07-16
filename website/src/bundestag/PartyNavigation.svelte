@@ -147,4 +147,8 @@
     background-color: white;
     font-weight: bold;
   }
+
+  button {
+    cursor: pointer;
+  }
 </style>

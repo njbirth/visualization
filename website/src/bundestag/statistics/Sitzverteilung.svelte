@@ -8,7 +8,6 @@
   export let selected;
 
   function getColors(parties, labels, selected) {
-    console.log(parties)
     parties.sort((a, b) => b.seats - a.seats);
     let partyColors = extractPartyIdentifiers(parties, "color");
     let partyColorsAlpha = partyColors.map((color) => α(color, 0.7));
@@ -31,6 +30,12 @@
     return [colors, colorsAlpha];
   }
 
+  function getBorders(labels, selected) {
+    return labels.map((party) => {
+      if (selected.includes(party.name)) return 3;
+      else return 0;
+    });
+  }
   $: parties.sort((a, b) => b.seats - a.seats);
   let partyIdentifiers;
   $: partyIdentifiers = extractPartyIdentifiers(parties);
@@ -38,8 +43,12 @@
   $: partyLabels = extractPartyIdentifiers(parties, "name");
 
   let colors = [];
+  let borders = [];
 
   $: colors = getColors(parties, partyIdentifiers, selected);
+  $: borders = getBorders(parties, selected);
+  $: console.log(parties);
+  $: console.log(selected);
 
   let partySeats;
   $: partySeats = extractPartyIdentifiers(parties, "seats");
@@ -52,19 +61,21 @@
     labels: partyLabels,
     datasets: [
       {
-        label: "Sitzplätze",
         data: partySeats,
         backgroundColor: colors[1],
-        borderWidth: 2,
+        borderWidth: borders,
         borderColor: colors[0],
       },
     ],
   };
 
   let options = {
+    legend: {
+      display: false,
+    },
     responsive: true,
     animation: {
-        duration: 0
+      duration: 0,
     },
     scales: {
       xAxes: [

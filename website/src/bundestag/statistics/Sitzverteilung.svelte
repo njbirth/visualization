@@ -65,6 +65,7 @@
         backgroundColor: colors[1],
         borderWidth: borders,
         borderColor: colors[0],
+        barPercentage: 1,
       },
     ],
   };
@@ -80,7 +81,6 @@
     scales: {
       xAxes: [
         {
-          barPercentage: 1,
           gridLines: {
             display: true,
             color: "rgba(0, 0, 0, 0.1)",

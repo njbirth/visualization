@@ -20,6 +20,8 @@
 - [MP data ("Stammdaten")](https://www.bundestag.de/resource/blob/472878/5ff47798a24a5e729d0d116f2d4c6bb2/MdB-Stammdaten-data.zip)
 - [Vote data](https://www.bundestag.de/parlament/plenum/abstimmung/liste)
 
+The version of the MP data we used is from 2021-03-12. Please note that Nikolas Löbel left the parliament on 2021-03-10, while his replacement, Kordula Kovac, joined on 2021-03-17. Therefore, in our data the Bundestag has only 708 MPs and not 709.
+
 ### Directory structure
 
 ```

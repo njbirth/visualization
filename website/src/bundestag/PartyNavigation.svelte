@@ -118,7 +118,7 @@
     {/each}
   </ul>
   <button on:click={onSelectAll}>Alle markieren</button>
-  <button on:click={onDeselectAll}>Reset</button>
+  <button on:click={onDeselectAll}>Alle abwählen</button>
 </div>
 
 <style>

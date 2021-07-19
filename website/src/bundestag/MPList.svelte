@@ -36,7 +36,7 @@
         <li>
           <span class="link clickable" on:click={() => onSelectMP(mp)}>
             {mp.nachname}, {mp.akad_titel ? mp.akad_titel : ""}
-            {mp.vorname}, ({mp.partei})</span
+            {mp.vorname} ({mp.partei})</span
           >
         </li>
       {/each}

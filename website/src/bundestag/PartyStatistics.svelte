@@ -1,28 +1,63 @@
 <script>
-  import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
-  import Sitzverteilung from "./statistics/Sitzverteilung.svelte";
+  export let statisticData;
 
-  export let mps;
-  export let parties;
-  export let selected;
+  import Bar from "svelte-chartjs/src/Bar.svelte";
+  import { chartDataSeatAllocation } from "./Statistics";
+
+  let meta;
+  $: meta = statisticData.data.meta;
+  let data;
+  $: data = statisticData.data.data;
+  let type;
+  $: type = statisticData.type;
+
+  let chartData;
+  let chartOptions;
+
+  function calcChartData(data, meta, type) {
+    let chartData;
+    let chartOptions;
+    if (type == "seat-distribution") {
+      chartData = chartDataSeatAllocation(meta, data);
+      chartOptions = {
+        legend: {
+          display: false,
+        },
+        responsive: true,
+        animation: {
+          duration: 0,
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: "rgba(0, 0, 0, 0.1)",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: "rgba(0, 0, 0, 0.1)",
+              },
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      };
+    }
+    return [chartData, chartOptions];
+  }
+  let chart;
+  $: chart = calcChartData(data, meta, type);
+  $: chartData = chart[0];
+  $: chartOptions = chart[1];
 </script>
 
-<Tabs>
-  <TabList>
-    <Tab>Sitzanteile</Tab>
-    <Tab>Altersverteilung</Tab>
-    <Tab>Three</Tab>
-  </TabList>
-
-  <TabPanel>
-    <Sitzverteilung {parties} {mps} {selected} />
-  </TabPanel>
-
-  <TabPanel>
-    <h3>Panel Two</h3>
-  </TabPanel>
-
-  <TabPanel>
-    <h3>Panel Three</h3>
-  </TabPanel>
-</Tabs>
+{#if type == "seat-distribution"}
+  <Bar data={chartData} options={chartOptions} />
+{/if}

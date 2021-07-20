@@ -78,11 +78,9 @@ export function chartDataAgeDistribution(meta, data) {
     myMap.set(p.partei_id, p.seats);
   });
   let selected = meta.filter((x) => x.selected).map(x => x.partei_id);
-  console.log(selected);
   let selectedMPs = data
     .filter((p) => selected.includes(p.partei_id))
     .sort((a, b) => myMap.get(b.partei_id) - myMap.get(a.partei_id));
-  console.log(selectedMPs);
 
   return [
     {

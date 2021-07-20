@@ -1,9 +1,14 @@
 <script>
-  export let statisticData;
-
   import Bar from "svelte-chartjs/src/Bar.svelte";
-  import { chartDataSeatAllocation } from "./Statistics";
+  import {
+    chartDataAgeDistribution,
+    chartDataSeatAllocation,
+    chartOptionsAgeDistribution,
+    chartOptionsSeatAllocation,
+  } from "./Statistics";
+  import ViolinPlot from "./plot-wrappers/ViolinPlot.svelte";
 
+  export let statisticData;
   let meta;
   $: meta = statisticData.data.meta;
   let data;
@@ -11,53 +16,39 @@
   let type;
   $: type = statisticData.type;
 
-  let chartData;
-  let chartOptions;
+  let charts = {};
 
   function calcChartData(data, meta, type) {
-    let chartData;
-    let chartOptions;
-    if (type == "seat-distribution") {
-      chartData = chartDataSeatAllocation(meta, data);
-      chartOptions = {
-        legend: {
-          display: false,
-        },
-        responsive: true,
-        animation: {
-          duration: 0,
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: "rgba(0, 0, 0, 0.1)",
-              },
-            },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: "rgba(0, 0, 0, 0.1)",
-              },
-              ticks: {
-                beginAtZero: true,
-              },
-            },
-          ],
-        },
-      };
+    switch (type) {
+      case "seat-distribution": {
+        charts["seat-distribution"] = {};
+        charts["seat-distribution"]["data"] = chartDataSeatAllocation(
+          meta,
+          data
+        );
+        charts["seat-distribution"]["options"] = chartOptionsSeatAllocation();
+      }
+      case "age-distribution": {
+        charts["age-distribution"] = {};
+        charts["age-distribution"]["data"] = chartDataAgeDistribution(
+          meta,
+          data
+        );
+        charts["age-distribution"]["options"] = chartOptionsAgeDistribution();
+      }
     }
-    return [chartData, chartOptions];
   }
-  let chart;
-  $: chart = calcChartData(data, meta, type);
-  $: chartData = chart[0];
-  $: chartOptions = chart[1];
+  $: calcChartData(data, meta, type);
 </script>
 
 {#if type == "seat-distribution"}
-  <Bar data={chartData} options={chartOptions} />
+  <Bar
+    data={charts["seat-distribution"].data}
+    options={charts["seat-distribution"].options}
+  />
+{:else if type == "age-distribution"}
+  <ViolinPlot
+    data={charts["age-distribution"].data}
+    layout={charts["age-distribution"].options}
+  />
 {/if}

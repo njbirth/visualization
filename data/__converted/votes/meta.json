@@ -1,0 +1,37 @@
+{
+	"20191220_2": {
+		"short": "Bewaffnete Drohnen",
+		"title": "Keine Anschaffung, sondern Ächtung bewaffneter Drohnen",
+		"desc": "Antrag der Abgeordneten Tobias Pflüger, Andrej Hunko, Heike Hänsel, weiterer Abgeordneter und der Fraktion DIE LINKE.",
+		"documents": ["https://dserver.bundestag.de/btd/19/160/1916041.pdf"],
+		"date": "20.12.2019"
+	},
+	"20210610_4": {
+		"short": "Vermögensteuergesetz",
+		"title": "Änderung des Vermögensteuergesetzes (VStG)",
+		"desc": "Gesetzentwurf der Abgeordneten Markus Herbrand, Christian Dürr, Dr. Florian Toncar, weiterer Abgeordneter und der Fraktion der FDP\n\nEnwurf eines Gesetzes zur Änderung des Vermögensteuergesetzes (VStG)",
+		"documents": [],
+		"date": "10.06.2021"
+	},
+	"20210624_1": {
+		"short": "Bundes-Klimaschutzgesetz",
+		"title": "Änderung des Bundes-Klimaschutzgesetzes",
+		"desc": "Gesetzentwurf der Bundesregierung\n\nEntwurf eines Ersten Gesetzes zur Änderung des Bundes-Klimaschutzgesetzes",
+		"documents": [],
+		"date": "10.06.2021"
+	},
+	"20210624_2": {
+		"title": "Bundesnaturschutzgesetz",
+		"title": "Änderung des Bundesnaturschutzgesetzes",
+		"desc": "Gesetzentwurf der Bundesregierung\n\nEntwurf eines Dritten Gesetzes zur Änderung des Bundesnaturschutzgesetzes",
+		"documents": [],
+		"date": "10.06.2021"
+	},
+	"20210624_4": {
+		"short": "geschlechtergerechte Sprache",
+		"title": "Verwendung geschlechtergerechter Sprache",
+		"desc": "Antrag der Abgeordneten Stephan Brandner, Dr. Heiko Heßenkemper, Nicole Höchst, weiterer Abgeordneter und der Fraktion der AfD\n\nKeine Verwendung der sogenannten gendergerechten Sprache durch die Bundesregierung",
+		"documents": [],
+		"date": "10.06.2021"
+	}
+}

@@ -64,30 +64,35 @@
   ];
 </script>
 
-<Card style="width: 50%; margin: 1em;" flat={true}>
-  <CardTitle>Abgeordnete</CardTitle>
-  {#each letters as letter}
-    {#if data.find((x) => {
-      return letter.flatMap((l) => x.nachname.startsWith(l.toLowerCase()) || x.nachname.startsWith(l.toUpperCase()));
-    })}
-      <CardSubtitle># {letter[0]}</CardSubtitle>
-    {/if}
-    <CardText>
-      <ul>
-        {#each data
-          .filter((x) => letter
-              .flatMap((l) => x.nachname.startsWith(l.toLowerCase()) || x.nachname.startsWith(l.toUpperCase()))
-              .includes(true))
-          .sort((a, b) => {
-            a = (a.nachname + a.vorname).toLowerCase();
-            b = (b.nachname + b.vorname).toLowerCase();
-            return a.localeCompare(b);
-          }) as person}
-          <li>{person.nachname}, {person.vorname}</li>
-        {/each}
-      </ul>
-    </CardText>
-  {/each}
+<Card
+  style="width: 50%; margin: 1em;"
+  flat={true}
+>
+  <CardTitle >Abgeordnete</CardTitle>
+  <div style="overflow-y: auto; max-height: 84vh;">
+    {#each letters as letter}
+      {#if data.find((x) => letter
+          .flatMap((l) => meta.find((m) => m.partei_id === x.partei_id).selected && (x.nachname.startsWith(l.toLowerCase()) || x.nachname.startsWith(l.toUpperCase())))
+          .includes(true))}
+        <CardSubtitle># {letter[0]}</CardSubtitle>
+        <CardText>
+          <ul>
+            {#each data
+              .filter((x) => meta.find((m) => m.partei_id === x.partei_id).selected && letter
+                    .flatMap((l) => x.nachname.startsWith(l.toLowerCase()) || x.nachname.startsWith(l.toUpperCase()))
+                    .includes(true))
+              .sort((a, b) => {
+                a = (a.nachname + a.vorname).toLowerCase();
+                b = (b.nachname + b.vorname).toLowerCase();
+                return a.localeCompare(b);
+              }) as person}
+              <li>{person.nachname}, {person.vorname}</li>
+            {/each}
+          </ul>
+        </CardText>
+      {/if}
+    {/each}
+  </div>
 </Card>
 <Divider vertical={true} />
 <Card style="width: 50%; margin: 1em;" flat={true}>
@@ -112,7 +117,7 @@
   ul li {
     display: inline-block;
     vertical-align: top;
-    width: 49%;
+    width: 50%;
     min-width: 170px;
   }
 </style>

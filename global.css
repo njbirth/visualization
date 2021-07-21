@@ -6,8 +6,6 @@ html, body {
 
 body {
 	color: #333;
-	margin: 0;
-	padding: 0px;
 	box-sizing: border-box;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -45,23 +43,19 @@ input:disabled {
 }
 
 button {
-	color: whitesmoke;
-	background-color: rgb(8, 8, 102);
+	color: #333;
+	background-color: #f4f4f4;
 	outline: none;
-	cursor: pointer;
-	border-radius: 5px;
-	border: 3px solid  #060647;
 }
 
 button:disabled {
-	color: #b8b8f9;
-	cursor: not-allowed;
+	color: #999;
 }
 
 button:not(:disabled):active {
-	background-color: rgb(50, 50, 148);
+	background-color: #ddd;
 }
 
 button:focus {
-	border-color: #0a0a76;
+	border-color: #666;
 }

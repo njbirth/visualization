@@ -18,6 +18,7 @@
   import VoteOverview from "./bundestag/VoteOverview.svelte";
   import PartyNavigation from "./bundestag/PartyNavigation.svelte";
   import VoteNavigation from "./bundestag/VoteNavigation.svelte";
+  import Profile from "./bundestag/Profile.svelte";
 
   export let basepath = "";
   const items = [
@@ -145,7 +146,7 @@
     </div>
     <div style="display: flex; width: 100%">
       <Router {basepath}>
-        <Route primary={true} path="/parties">
+        <Route primary={true} path="{basepath}/parties">
           <PartyOverview {meta} {data} />
         </Route>
         <Route path="/votes/*">
@@ -154,4 +155,11 @@
       </Router>
     </div>
   </div>
+  <Router>
+    <Route path="/*?profileID">
+      <div>
+        <Profile {data} />
+      </div>
+    </Route>
+  </Router>
 </MaterialApp>

@@ -9,7 +9,9 @@
     TabContent,
     Tabs,
   } from "svelte-materialify";
+  import { navigate } from "svelte-navigator";
   import PartyStatistics from "./PartyStatistics.svelte";
+  import { filterRoute } from "./Route";
 
   export let meta;
   export let data;
@@ -64,11 +66,8 @@
   ];
 </script>
 
-<Card
-  style="width: 50%; margin: 1em;"
-  flat={true}
->
-  <CardTitle >Abgeordnete</CardTitle>
+<Card style="width: 50%; margin: 1em;" flat={true}>
+  <CardTitle>Abgeordnete</CardTitle>
   <div style="overflow-y: auto; max-height: 84vh;">
     {#each letters as letter}
       {#if data.find((x) => letter
@@ -86,7 +85,15 @@
                 b = (b.nachname + b.vorname).toLowerCase();
                 return a.localeCompare(b);
               }) as person}
-              <li>{person.nachname}, {person.vorname}</li>
+              <li
+                on:click={() =>
+                  navigate(
+                    "?profileID=" +
+                      filterRoute(person.nachname + " " + person.vorname)
+                  )}
+              >
+                {person.nachname}, {person.vorname} ({person.partei})
+              </li>
             {/each}
           </ul>
         </CardText>
@@ -119,5 +126,6 @@
     vertical-align: top;
     width: 50%;
     min-width: 170px;
+    cursor: pointer;
   }
 </style>

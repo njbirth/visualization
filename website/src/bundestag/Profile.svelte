@@ -31,7 +31,7 @@
   let wahlperioden;
   let value = [0, 1];
   let valueWP = [0];
-  $: if (person !== null) {
+  $: if (person !== null && person !== undefined) {
     wahlperioden = person.wahlperioden.reverse();
   }
 

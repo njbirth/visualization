@@ -82,7 +82,7 @@
         </List>
         <Divider />
         <Router {basepath}>
-          <Route primary={true} path="{basepath}/parties">
+          <Route path="/parties/*">
             <PartyNavigation
               {meta}
               {partySelected}
@@ -146,7 +146,7 @@
     </div>
     <div style="display: flex; width: 100%">
       <Router {basepath}>
-        <Route primary={true} path="{basepath}/parties">
+        <Route path="/parties">
           <PartyOverview {meta} {data} />
         </Route>
         <Route path="/votes/*">

@@ -82,7 +82,7 @@
         </List>
         <Divider />
         <Router {basepath}>
-          <Route primary={true} path="/parties">
+          <Route primary={true} path="{basepath}/parties">
             <PartyNavigation
               {meta}
               {partySelected}

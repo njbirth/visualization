@@ -28,14 +28,25 @@
     });
   }
 
-  let value = [0];
+  let wahlperioden;
+  let value = [0, 1];
+  let valueWP = [0];
+  $: if (person !== null) {
+    wahlperioden = person.wahlperioden.reverse();
+  }
+
+  function onClose() {
+    value = [0, 1];
+    valueWP = [0];
+    navigate(-1);
+  }
 </script>
 
 <Dialog
   {active}
   width="1024px"
   on:outroend={() => {
-    if (active) navigate(-1);
+    if (active) onClose();
   }}
 >
   {#if person !== null}
@@ -48,7 +59,7 @@
       >
       <div style="flex-grow:1" />
       <div>
-        <Button icon on:click={() => navigate(-1)}>
+        <Button icon on:click={() => onClose()}>
           <Icon path={mdiCloseCircle} />
         </Button>
       </div>
@@ -71,8 +82,8 @@
                 Wahlperioden
               </p></span
             >
-            <ExpansionPanels popout flat>
-              {#each person.wahlperioden as wp}
+            <ExpansionPanels bind:value={valueWP} popout flat>
+              {#each wahlperioden as wp}
                 <ExpansionPanel>
                   <span slot="header">{wp.wp}. Wahlperiode</span>
                   <div>

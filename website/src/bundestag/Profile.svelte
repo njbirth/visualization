@@ -40,7 +40,15 @@
     valueWP = [0];
     navigate(-1);
   }
+
+  function handleWindowKeyDown(event) {
+    if (event.key === "Escape") {
+      if (active) onClose();
+    }
+  }
 </script>
+
+<svelte:window on:keydown={handleWindowKeyDown} />
 
 <Dialog
   {active}

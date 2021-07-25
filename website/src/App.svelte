@@ -146,7 +146,7 @@
     </div>
     <div style="display: flex; width: 100%">
       <Router {basepath}>
-        <Route path="/parties">
+        <Route path="/parties/*">
           <PartyOverview {meta} {data} />
         </Route>
         <Route path="/votes/*">

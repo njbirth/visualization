@@ -1,5 +1,6 @@
 <script>
   import { mdiThumbDown, mdiThumbUp } from "@mdi/js";
+  import { onMount } from "svelte";
 
   import {
     Card,
@@ -14,13 +15,24 @@
     Subheader,
   } from "svelte-materialify";
 
-  import { navigate, Route } from "svelte-navigator";
+  import { navigate, Route, useLocation, useResolve } from "svelte-navigator";
   import { filterRoute } from "./Route";
 
   import VoteBar from "./VoteBar.svelte";
   export let votes;
   export let meta;
-  export let path;
+  export let value = 0;
+
+  const resolve = useResolve();
+  const location = useLocation();
+  const path = resolve($location.pathname);
+
+  onMount(() => {
+    if (!(votes == undefined || votes.length == 0))
+      navigate(
+        path + "/" + filterRoute(votes[value].short.split(" ").join(""))
+      );
+  });
 </script>
 
 {#each votes as vote}

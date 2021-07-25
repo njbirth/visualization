@@ -146,7 +146,7 @@
                 ></g
               ></svg
             >
-            <VoteNavigation {votes} path="{basepath}/votes" /></Route
+            <VoteNavigation {votes} /></Route
           >
         </Router>
       </NavigationDrawer>
@@ -157,7 +157,7 @@
           <PartyOverview {meta} {data} />
         </Route>
         <Route path="/votes/*">
-          <VoteOverview path="{basepath}/votes" {votes} {meta} />
+          <VoteOverview {votes} {meta} />
         </Route>
       </Router>
     </div>

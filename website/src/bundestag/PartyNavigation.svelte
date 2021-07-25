@@ -104,6 +104,10 @@
         <ListItem
           value={party.partei_id}
           on:click={() => onToggle(party.partei_id, party.link)}
+          on:dblclick={() => {
+            onDeselectAll();
+            onToggle(party.partei_id, party.link);
+          }}
         >
           <span slot="prepend">
             <Checkbox
@@ -128,12 +132,6 @@
 </div>
 
 <style>
-  ul {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
-  }
-
   .margin {
     margin-left: 10px;
     margin-right: 10px;

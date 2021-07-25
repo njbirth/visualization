@@ -247,6 +247,9 @@ function groupBy(objectArray, property) {
 
 export function chartOptionsReligion() {
   return {
+    legend: {
+      display: false,
+    },
     animation: {
       duration: 0,
     },

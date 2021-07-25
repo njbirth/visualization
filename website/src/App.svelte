@@ -19,6 +19,7 @@
   import PartyNavigation from "./bundestag/PartyNavigation.svelte";
   import VoteNavigation from "./bundestag/VoteNavigation.svelte";
   import Profile from "./bundestag/Profile.svelte";
+  import { onMount } from "svelte";
 
   export let basepath = "";
   const items = [
@@ -61,6 +62,9 @@
   function partySelected(party) {
     return meta.find((element) => element.partei_id === party).selected;
   }
+  onMount(() => {
+    navigate(basepath + "/parties");
+  });
 </script>
 
 <MaterialApp {theme}>
@@ -69,9 +73,12 @@
     <div>
       <NavigationDrawer>
         <List nav dense>
-          <ListItemGroup>
-            {#each items as item}
-              <ListItem on:click={() => navigate(basepath + item.path)}>
+          <ListItemGroup value={0}>
+            {#each items as item, i}
+              <ListItem
+                value={i}
+                on:click={() => navigate(basepath + item.path)}
+              >
                 <span slot="prepend">
                   <Icon path={item.icon} />
                 </span>

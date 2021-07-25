@@ -45,12 +45,12 @@
       case "gender-distribution": {
         charts["gender-distribution"] = {};
         charts["gender-distribution"]["data"] = chartDataGender(meta, data);
-        charts["gender-distribution"]["options"] = chartOptionsGender();
+        charts["gender-distribution"]["options"] = chartOptionsGender(false);
         charts["gender-relative-distribution"] = {};
         charts["gender-relative-distribution"]["data"] =
           chartDataGenderRelative(meta, data);
         charts["gender-relative-distribution"]["options"] =
-          chartOptionsGender("Anzahl in %");
+          chartOptionsGender(true);
       }
       case "religion-distribution": {
         charts["religion-distribution"] = {};

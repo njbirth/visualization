@@ -179,7 +179,7 @@ export function chartDataGender(meta, data) {
   };
 }
 
-export function chartOptionsGender(ylabel = "Anzahl") {
+export function chartOptionsGender(relative=false) {
   return {
     legend: {
       display: true,
@@ -201,13 +201,15 @@ export function chartOptionsGender(ylabel = "Anzahl") {
         {
           scaleLabel: {
             display: true,
-            labelString: ylabel,
+            labelString: relative ? "Anzahl in %" : "Anzahl",
           },
           gridLines: {
             display: true,
             color: "rgba(0, 0, 0, 0.1)",
           },
+
           ticks: {
+            suggestedMax: relative ? 100 : 0,
             beginAtZero: true,
           },
         },

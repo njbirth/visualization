@@ -16,7 +16,10 @@
 
   import { navigate, Route } from "svelte-navigator";
   import { filterRoute } from "./Route";
+
+  import VoteBar from "./VoteBar.svelte";
   export let votes;
+  export let meta;
   export let path;
 </script>
 
@@ -35,7 +38,7 @@
             <Subheader>Ja</Subheader>
             <ListItemGroup class="blue-text">
               {#each vote.votes.filter((x) => x.vote == "0") as person}
-                <ListItem 
+                <ListItem
                   on:click={() =>
                     navigate(
                       filterRoute(
@@ -84,7 +87,8 @@
     </div>
     <Divider vertical={true} />
     <Card style="width: 50%; margin: 1em;" flat={true}
-      ><CardTitle>Statistik</CardTitle></Card
-    >
+      ><CardTitle>Statistik</CardTitle>
+      <VoteBar data={vote.votes} {meta} />
+    </Card>
   </Route>
 {/each}

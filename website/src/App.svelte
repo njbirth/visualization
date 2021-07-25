@@ -150,7 +150,7 @@
           <PartyOverview {meta} {data} />
         </Route>
         <Route path="/votes/*">
-          <VoteOverview path="{basepath}/votes" {votes} />
+          <VoteOverview path="{basepath}/votes" {votes} {meta} />
         </Route>
       </Router>
     </div>

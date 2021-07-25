@@ -18,7 +18,7 @@
   let statistics;
   $: statistics = [
     {
-      title: "Sitzverteilung",
+      title: "Sitze",
       type: "seat-distribution",
       data: {
         meta: meta,
@@ -26,8 +26,24 @@
       },
     },
     {
-      title: "Altersverteilung",
+      title: "Alter",
       type: "age-distribution",
+      data: {
+        meta: meta,
+        data: data,
+      },
+    },
+    {
+      title: "Geschlechter",
+      type: "gender-distribution",
+      data: {
+        meta: meta,
+        data: data,
+      },
+    },
+    {
+      title: "Religion",
+      type: "religion-distribution",
       data: {
         meta: meta,
         data: data,

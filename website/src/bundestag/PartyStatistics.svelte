@@ -12,7 +12,7 @@
     chartOptionsSeatAllocation,
   } from "./Statistics";
   import ViolinPlot from "./plot-wrappers/ViolinPlot.svelte";
-  import Switch from "svelte-materialify";
+  import { Switch } from "svelte-materialify";
 
   export let statisticData;
   let meta;

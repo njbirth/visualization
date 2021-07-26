@@ -4,15 +4,15 @@
   import {
     Button,
     Checkbox,
+    Icon,
     ListItem,
     ListItemGroup,
   } from "svelte-materialify";
+  import { mdiCheckboxMultipleBlank, mdiCheckboxMultipleBlankOutline, mdiCheckboxMultipleMarked, mdiPen } from "@mdi/js";
   const dispatcher = createEventDispatcher();
 
   export let meta;
   export let partySelected;
-
-  let value = "";
 
   function onToggle(party, link) {
     dispatcher("on-toggle", party);
@@ -120,14 +120,32 @@
         >
       {/each}
     </ListItemGroup>
-    <div>
-      <Button style="width: 100%;" on:click={onSelectAll}>Alle markieren</Button
+    <div class="text-center" style="margin-top: 1em;">
+      <span>
+        <Button
+          outlined
+          size="small"
+          style="width: 45%;"
+          margin="5px;"
+          on:click={onSelectAll}
+        >
+          <Icon path={mdiCheckboxMultipleMarked} class="mr-3" />
+          Alle
+        </Button>
+      </span>
+      <span>
+        <Button
+          outlined
+          size="small"
+          style="width: 45%;"
+          on:click={onDeselectAll}
+        >
+          <Icon path={mdiCheckboxMultipleBlankOutline} class="mr-3" />
+          Keine</Button
+        ></span
       >
-      <Button style="width: 100%;" on:click={onDeselectAll}
-        >Alle abwählen</Button
-      >
-      <p style="color: #999;font-size: 11pt;">Stand: 12.03.2021</p>
     </div>
+    <p style="color: #999;font-size: 11pt;">Stand: 12.03.2021</p>
   </div>
 </div>
 

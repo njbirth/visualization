@@ -12,7 +12,8 @@
     chartOptionsSeatAllocation,
   } from "./Statistics";
   import ViolinPlot from "./plot-wrappers/ViolinPlot.svelte";
-  import { Switch } from "svelte-materialify";
+  import Map from "./Map.svelte";
+  import { Switch, Dialog, Button } from "svelte-materialify";
 
   export let statisticData;
   let meta;
@@ -61,6 +62,7 @@
   }
 
   let genderRelative = false;
+  let mapActive = false;
 
   $: calcChartData(data, meta, type);
 </script>
@@ -70,6 +72,12 @@
     data={charts["seat-distribution"].data}
     options={charts["seat-distribution"].options}
   />
+  <Dialog bind:active={mapActive} width="1000">
+    <Map />
+  </Dialog>
+  <div style="margin: 20px">
+    <Button size="small" on:click={function() { mapActive = true; }}>Stimmenverteilung nach Wahlkreisen</Button>
+  </div>
 {:else if type == "age-distribution"}
   <ViolinPlot
     data={charts["age-distribution"].data}

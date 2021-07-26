@@ -44,7 +44,7 @@
   info.update = function (feature) {
     if (feature == null)
       this._div.innerHTML =
-        "<b>Bundesgebiet</b><hr>Klicke auf einen Wahlkreis.";
+        "<b>Bundesgebiet</b><hr style=\"margin-top: 7px;margin-bottom: 7px;\">Wahlkreis auswählen, um weitere Informationen zu erhalten";
     else {
       let data = wahlkreise_stimmen.find(function (elem) {
         return elem.nr == feature.properties.WKR_NR;
@@ -56,7 +56,7 @@
         return b[0] - a[0];
       });
       let all_votes = data[stimmen + "_gültig"];
-      let content = "<b>" + feature.properties.WKR_NAME + "</b><hr>";
+      let content = "<b>" + feature.properties.WKR_NAME + "</b><hr style=\"margin-top: 7px;margin-bottom: 7px;\">";
       content += "<table>";
       for (let vote in votes_list) {
         vote = votes_list[vote];
@@ -119,7 +119,7 @@
       click: selectWkr,
     });
 
-    layer.bindTooltip(feature.properties.WKR_NAME, {
+    layer.bindTooltip("<div style=\"font-size: 11pt\">" + feature.properties.WKR_NAME + "</div", {
       direction: "left",
       offset: [-20, 0],
       sticky: true,
@@ -171,5 +171,5 @@
 
 <div
   bind:this={component}
-  style="width: 900px; height: 620px; background: #fff;"
+  style="width: 1000px; height: 620px; background: #fff;"
 />

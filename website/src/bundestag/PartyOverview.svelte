@@ -83,12 +83,10 @@
   ];
   let profiles = [];
   $: profiles = meta.filter((x) => x.selected).map((x) => x.profile);
-  $: console.log(profiles);
   $: {
     if (profiles.length !== 1) profiles = [];
     else profiles = profiles[0];
   }
-  $: console.log(profiles);
 </script>
 
 <Card style="width: 50%; margin: 1em;" flat={true}>

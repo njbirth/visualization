@@ -1,5 +1,9 @@
 <script>
-  import { mdiThumbDown, mdiThumbUp } from "@mdi/js";
+  import {
+    mdiClipboardCheck,
+    mdiClipboardOff,
+    mdiClipboardRemove,
+  } from "@mdi/js";
   import { onMount } from "svelte";
 
   import {
@@ -7,21 +11,25 @@
     CardSubtitle,
     CardText,
     CardTitle,
+    Col,
     Divider,
+    ExpansionPanel,
+    ExpansionPanels,
     Icon,
-    List,
     ListItem,
-    ListItemGroup,
-    Subheader,
+    Row,
   } from "svelte-materialify";
 
   import { navigate, Route, useLocation, useResolve } from "svelte-navigator";
   import { filterRoute } from "./Route";
+  import { voteType } from "./Statistics";
 
   import VoteBar from "./VoteBar.svelte";
   export let votes;
   export let meta;
   export let value = 0;
+
+  let voteNums = [0, 1, 2, 3, 4];
 
   const resolve = useResolve();
   const location = useLocation();
@@ -41,60 +49,78 @@
       <Card flat={true}
         ><CardTitle>{vote.title}</CardTitle><CardSubtitle
           >{vote.date}</CardSubtitle
-        ><CardText>{vote.desc}</CardText></Card
+        ><CardText
+          >{vote.desc}
+          <ul>
+            {#each vote.documents as doc, i}
+              <li>
+                <a target="_blank" rel="noopener noreferrer" href={doc}
+                  >Dokument #{i+1}</a
+                >
+              </li>
+            {/each}
+          </ul></CardText
+        ></Card
       >
       <Card flat={true}
-        ><CardTitle>Stimmen</CardTitle><CardSubtitle>Abgeordnete</CardSubtitle
-        ><CardText>
-          <List dense class="elevation-2" style="width:300px">
-            <Subheader>Ja</Subheader>
-            <ListItemGroup class="blue-text">
-              {#each vote.votes.filter((x) => x.vote == "0") as person}
-                <ListItem
-                  on:click={() =>
-                    navigate(
-                      filterRoute(
-                        vote.short +
-                          "?profileID=" +
-                          person.name +
-                          " " +
-                          person.vorname
-                      )
-                    )}
-                >
-                  <span slot="prepend">
-                    <Icon style="color: green;" path={mdiThumbUp} />
-                  </span>
-                  {person.name},
-                  {person.vorname}
-                </ListItem>
-              {/each}
-            </ListItemGroup>
-            <Subheader>Nein</Subheader>
-            <ListItemGroup class="blue-text">
-              {#each vote.votes.filter((x) => x.vote == "1") as person}
-                <ListItem
-                  on:click={() =>
-                    navigate(
-                      filterRoute(
-                        vote.short +
-                          "?profileID=" +
-                          person.name +
-                          " " +
-                          person.vorname
-                      )
-                    )}
-                >
-                  <span slot="prepend">
-                    <Icon style="color: red;" path={mdiThumbDown} />
-                  </span>
-                  {person.name},
-                  {person.vorname}
-                </ListItem>
-              {/each}
-            </ListItemGroup>
-          </List>
-        </CardText></Card
+        ><CardTitle>Stimmen</CardTitle><CardSubtitle>Abgeordnete</CardSubtitle>
+        <CardText>
+          <ExpansionPanels>
+            {#each meta.map((x) => x.partei_id) as partei_id}
+              <ExpansionPanel>
+                <span style="height: 1em" slot="header">{partei_id}</span>
+                <div style="width: 100%;">
+                  {#each voteNums as voteID}
+                    {#if vote.votes.filter((x) => x.partei_id == partei_id && x.vote == voteID).length > 0}
+                      <Row style="margin-top: 1em;"
+                        ><ListItem><b># {voteType(voteID)}</b></ListItem></Row
+                      >
+                    {/if}
+                    <Row noGutters>
+                      {#each vote.votes.filter((x) => x.partei_id == partei_id && x.vote == voteID) as person}
+                        <Col cols={12} sm={6} md={6}
+                          ><div class="is-hovered" style="max-height: 2.5em;">
+                            <ListItem
+                              style="max-height: 2.5em; padding-bottom: 10px; cursor: pointer;"
+                              on:click={() =>
+                                navigate(
+                                  filterRoute(
+                                    vote.short +
+                                      "?profileID=" +
+                                      person.name +
+                                      " " +
+                                      person.vorname
+                                  )
+                                )}
+                            >
+                              <span slot="prepend">
+                                {#if person.vote == 0}
+                                  <Icon
+                                    path={mdiClipboardCheck}
+                                    style="color: green;"
+                                  />
+                                {:else if person.vote == 1}
+                                  <Icon
+                                    path={mdiClipboardRemove}
+                                    style="color: red;"
+                                  />
+                                {:else}
+                                  <Icon path={mdiClipboardOff} />
+                                {/if}
+                              </span>
+                              {person.name},
+                              {person.vorname}
+                            </ListItem>
+                          </div>
+                        </Col>
+                      {/each}
+                    </Row>
+                  {/each}
+                </div>
+              </ExpansionPanel>
+            {/each}
+          </ExpansionPanels></CardText
+        ></Card
       >
     </div>
     <Divider vertical={true} />
@@ -104,3 +130,9 @@
     </Card>
   </Route>
 {/each}
+
+<style>
+  .is-hovered:hover {
+    background-color: #f5f5f5;
+  }
+</style>

@@ -408,3 +408,20 @@ export function chartDataReligion(meta, data) {
     datasets: datasets,
   };
 }
+
+export function voteType(vote) {
+  switch (vote) {
+    case 0:
+      return "ja";
+    case 1:
+      return "nein";
+    case 2:
+      return "enthalten";
+    case 3:
+      return "ungültig";
+    case 4:
+      return "nicht abgegeben";
+    default:
+      return "nicht definiert";
+  }
+}

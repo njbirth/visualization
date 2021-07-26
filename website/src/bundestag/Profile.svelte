@@ -24,6 +24,7 @@
   } from "svelte-materialify";
   import { navigate, useLocation } from "svelte-navigator";
   import { filterRoute } from "./Route";
+  import { voteType } from "./Statistics";
 
   export let data;
   export let votes;
@@ -83,23 +84,6 @@
     personalVotes = mappedVotes.filter(
       (v) => v.nachname == person.nachname && v.vorname == person.vorname
     );
-  }
-
-  function voteType(vote) {
-    switch (vote) {
-      case 0:
-        return "ja";
-      case 1:
-        return "nein";
-      case 2:
-        return "enthalten";
-      case 3:
-        return "ungültig";
-      case 4:
-        return "nicht abgegeben";
-      default:
-        return "nicht definiert";
-    }
   }
 
   let fullscreen = false;

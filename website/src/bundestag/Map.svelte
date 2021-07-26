@@ -3,7 +3,7 @@
 	import wahlkreise_stimmen from "../../../data/map/wahlkreise_stimmen/wahlkreise_stimmen.json";
 	import L from "leaflet";
 	import { onMount } from "svelte";
-    import { Switch, ButtonGroup, ButtonGroupItem } from "svelte-materialify";
+    import { ButtonGroup, ButtonGroupItem } from "svelte-materialify";
 
 	let stimmen = "erststimmen";
     let selected = null;
@@ -91,7 +91,6 @@
             weight: selected != null && wkr == selected.properties.WKR_NR ? 2.0 : 1.0,
             opacity: 1,
             color: 'white',
-            dashArray: '2',
             fillOpacity: selected != null && wkr == selected.properties.WKR_NR ? 1.0 : 0.6
         };
     }

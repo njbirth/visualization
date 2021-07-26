@@ -10,6 +10,7 @@
     Tabs,
   } from "svelte-materialify";
   import { navigate } from "svelte-navigator";
+  import PartyProfile from "./PartyProfile.svelte";
   import PartyStatistics from "./PartyStatistics.svelte";
   import { filterRoute } from "./Route";
 
@@ -80,16 +81,28 @@
     ["Y"],
     ["Z"],
   ];
+  let profiles = [];
+  $: profiles = meta.filter((x) => x.selected).map((x) => x.profile);
+  $: console.log(profiles);
+  $: {
+    if (profiles.length !== 1) profiles = [];
+    else profiles = profiles[0];
+  }
+  $: console.log(profiles);
 </script>
 
 <Card style="width: 50%; margin: 1em;" flat={true}>
-  <CardTitle>Abgeordnete</CardTitle>
-  <div style="overflow-y: auto; max-height: 84vh;">
+  <div style="overflow-y: auto; max-height: 86vh;">
+    {#each profiles as profile}
+      <PartyProfile {profile} {data} />
+      <Divider />
+    {/each}
+    <CardTitle>Abgeordnete</CardTitle>
     {#each letters as letter}
       {#if data.find((x) => letter
           .flatMap((l) => meta.find((m) => m.partei_id === x.partei_id).selected && (x.nachname.startsWith(l.toLowerCase()) || x.nachname.startsWith(l.toUpperCase())))
           .includes(true))}
-        <CardSubtitle># {letter[0]}</CardSubtitle>
+        <CardSubtitle><b># {letter[0]}</b></CardSubtitle>
         <CardText>
           <ul>
             {#each data

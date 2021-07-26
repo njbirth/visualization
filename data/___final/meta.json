@@ -6,7 +6,13 @@
     "seats": 10,
     "color": "gray",
     "colorDeselect": "lightgray",
-    "order": 0
+    "order": 0,
+    "profile": [
+      {
+        "id": "fraktionslos",
+        "name": "fraktionslos"
+      }
+    ]
   },
   {
     "name": "DIE LINKE.",
@@ -15,7 +21,28 @@
     "seats": 69,
     "color": "#ff0066",
     "colorDeselect": "#ff7db1",
-    "order": 1
+    "order": 1,
+    "profile": [
+      {
+        "id": "DIE LINKE.",
+        "name": "DIE LINKE.",
+        "parteivorsitzende": ["Susanne Hennig-Wellsow", "Janine Wissler"],
+        "generalsekretaer": null,
+        "stellvvorsitzende": [
+          "Ali Al-Dailami",
+          "Ates Gürpinar",
+          "Tobias Pflüger",
+          "Martina Renner",
+          "Katina Schubert",
+          "Jana Seppelt"
+        ],
+        "gruendung": ["16. Juni 2007"],
+        "gruendungsort": ["Berlin"],
+        "mitgliederzahl": "ca. 60.350 (Stand: 31. Dezember 2020)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Die_Linke_logo.svg/300px-Die_Linke_logo.svg.png",
+        "src": "https://de.wikipedia.org/wiki/Die_Linke"
+      }
+    ]
   },
   {
     "name": "SPD",
@@ -24,7 +51,37 @@
     "seats": 152,
     "color": "#e30013",
     "colorDeselect": "#e3717b",
-    "order": 2
+    "order": 2,
+    "profile": [
+      {
+        "id": "SPD",
+        "name": "Sozialdemokratische Partei Deutschlands",
+        "parteivorsitzende": ["Saskia Esken", "Norbert Walter-Borjans"],
+        "generalsekretaer": "Lars Klingbeil",
+        "stellvvorsitzende": [
+          "Klara Geywitz",
+          "Hubertus Heil",
+          "Kevin Kühnert",
+          "Serpil Midyatli",
+          "Anke Rehlinger"
+        ],
+        "gruendung": [
+          "23. Mai 1863 (ADAV)",
+          "8. August 1869 (SDAP)",
+          "27. Mai 1875 (Vereinigung)",
+          "12. – 18. Oktober 1890 (SPD)"
+        ],
+        "gruendungsort": [
+          "Leipzig (ADAV)",
+          "Eisenach (SDAP)",
+          "Gotha (Vereinigung)",
+          "Halle (Saale) (SPD)"
+        ],
+        "mitgliederzahl": "ca. 419.300 (Stand: Dezember 2019)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Sozialdemokratische_Partei_Deutschlands%2C_Logo_um_2000.svg/140px-Sozialdemokratische_Partei_Deutschlands%2C_Logo_um_2000.svg.png",
+        "src": "https://de.wikipedia.org/wiki/Sozialdemokratische_Partei_Deutschlands"
+      }
+    ]
   },
   {
     "name": "Bündnis 90/Die Grünen",
@@ -33,16 +90,76 @@
     "seats": 67,
     "color": "#3e9b39",
     "colorDeselect": "#9ad197",
-    "order": 3
+    "order": 3,
+    "profile": [
+      {
+        "id": "GRÜNE",
+        "name": "Bündnis 90/Die Grünen",
+        "parteivorsitzende": ["Annalena Baerbock", "Robert Habeck"],
+        "generalsekretaer": "Michael Kellner",
+        "stellvvorsitzende": ["Ricarda Lang", "Jamila Schäfer"],
+        "gruendung": [
+          "13. Januar 1980 (Die Grünen)",
+          "21. September 1991 (Bündnis 90)",
+          "14. Mai 1993 (Vereinigung)"
+        ],
+        "gruendungsort": [
+          "Karlsruhe (Die Grünen)",
+          "Potsdam (Bündnis 90)",
+          "Leipzig (Vereinigung)"
+        ],
+        "mitgliederzahl": "ca. 106.000 (Stand: November 2020)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/B%C3%BCndnis_90_-_Die_Gr%C3%BCnen_Logo.svg/300px-B%C3%BCndnis_90_-_Die_Gr%C3%BCnen_Logo.svg.png",
+        "src": "https://de.wikipedia.org/wiki/B%C3%BCndnis_90/Die_Gr%C3%BCnen"
+      }
+    ]
   },
   {
-    "name": "CDU/CSU",
+    "name": "Union (CDU/CSU)",
     "partei_id": "CDU/CSU",
     "link": "cdu-csu",
     "seats": 245,
     "color": "black",
     "colorDeselect": "#707070",
-    "order": 4
+    "order": 4,
+    "profile": [
+      {
+        "id": "CDU",
+        "name": "Christlich Demokratische Union Deutschlands (CDU)",
+        "parteivorsitzende": ["Armin Laschet"],
+        "generalsekretaer": "Paul Ziemiak",
+        "stellvvorsitzende": [
+          "Volker Bouffier",
+          "Silvia Breher",
+          "Julia Klöckner",
+          "Jens Spahn",
+          "Thomas Strobl"
+        ],
+        "gruendung": ["26. Juni 1945 bzw. 20. bis 22. Oktober 1950"],
+        "gruendungsort": ["Berlin und Rheinland bzw. Goslar"],
+        "mitgliederzahl": "ca. 399.110 (Stand: Ende Dezember 2020)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Cdu-logo.svg/220px-Cdu-logo.svg.png",
+        "src": "https://de.wikipedia.org/wiki/Christlich_Demokratische_Union_Deutschlands"
+      },
+      {
+        "id": "CSU",
+        "name": "Christlich-Soziale Union in Bayern e. V. (CSU)",
+        "parteivorsitzende": ["Markus Söder"],
+        "generalsekretaer": "Markus Blume",
+        "stellvvorsitzende": [
+          "Martin Sailer",
+          "Angelika Niebler",
+          "Dorothee Bär",
+          "Manfred Weber",
+          "Melanie Huml"
+        ],
+        "gruendung": ["13. Oktober 1945"],
+        "gruendungsort": ["München und Würzburg"],
+        "mitgliederzahl": "ca. 140.876 (Stand: 9. Dezember 2019)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/CSU_Logo_since_2016.svg/300px-CSU_Logo_since_2016.svg.png",
+        "src": "https://de.wikipedia.org/wiki/Christlich-Soziale_Union_in_Bayern"
+      }
+    ]
   },
   {
     "name": "FDP",
@@ -51,7 +168,25 @@
     "seats": 80,
     "color": "#ffee00",
     "colorDeselect": "#ffee70",
-    "order": 5
+    "order": 5,
+    "profile": [
+      {
+        "id": "FDP",
+        "name": "Freie Demokratische Partei",
+        "parteivorsitzende": ["Christian Lindner"],
+        "generalsekretaer": "Volker Wissing",
+        "stellvvorsitzende": [
+          "Wolfgang Kubicki",
+          "Nicola Beer",
+          "Johannes Vogel"
+        ],
+        "gruendung": ["12. Dezember 1948"],
+        "gruendungsort": ["Heppenheim"],
+        "mitgliederzahl": "ca. 70.000 (Stand: 1. Juli 2021)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Logo_der_Freien_Demokraten.svg/220px-Logo_der_Freien_Demokraten.svg.png",
+        "src": "https://de.wikipedia.org/wiki/Freie_Demokratische_Partei"
+      }
+    ]
   },
   {
     "name": "AfD",
@@ -60,6 +195,24 @@
     "seats": 86,
     "color": "#00a0e2",
     "colorDeselect": "#70a0e2",
-    "order": 6
+    "order": 6,
+    "profile": [
+      {
+        "id": "AfD",
+        "name": "Alternative für Deutschland",
+        "parteivorsitzende": ["Jörg Meuthen", "Tino Chrupalla"],
+        "generalsekretaer": null,
+        "stellvvorsitzende": [
+          "Alice Weidel",
+          "Stephan Brandner",
+          "Beatrix von Storch"
+        ],
+        "gruendung": ["6. Februar 2013"],
+        "gruendungsort": ["Oberursel"],
+        "mitgliederzahl": "ca. 32.000 (Stand: Januar 2021)",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Alternative-fuer-Deutschland-Logo-2013.svg/185px-Alternative-fuer-Deutschland-Logo-2013.svg.png",
+        "src": "https://de.wikipedia.org/wiki/Alternative_f%C3%BCr_Deutschland"
+      }
+    ]
   }
 ]

@@ -51,8 +51,8 @@
   function onClose() {
     value = [0, 1, 2];
     valueWP = [0];
-    fullscreen = false;
     navigate(-1);
+    fullscreen = false;
   }
 
   function handleWindowKeyDown(event) {
@@ -207,14 +207,15 @@
             <Row noGutters>
               {#each personalVotes as vote}
                 <Col cols={12} sm={6} md={6}>
-                  <Tooltip bottom>
-                    <span slot="tip">{voteType(vote.vote)}</span>
+                  <div class="tooltip">
                     <ListItem
                       on:click={() =>
                         navigate(
                           "/visualization/votes/" + filterRoute(vote.meta.short)
                         )}
-                      ><span slot="prepend">
+                    >
+                      <span class="tooltiptext">{voteType(vote.vote)}</span>
+                      <span slot="prepend">
                         {#if vote.vote == 0}
                           <Icon
                             path={mdiClipboardCheck}
@@ -228,8 +229,8 @@
                       </span>{vote.meta.short}<span slot="subtitle"
                         >{vote.meta.date}</span
                       ></ListItem
-                    ></Tooltip
-                  >
+                    >
+                  </div>
                 </Col>
               {/each}
             </Row>
@@ -287,3 +288,45 @@
     </div>
   {/if}</Dialog
 >
+
+<style>
+  /* Source: of CSS code: https://www.w3schools.com/howto/howto_css_tooltip.asp */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>

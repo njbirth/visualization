@@ -5,6 +5,8 @@
   import { onMount } from "svelte";
   import { ButtonGroup, ButtonGroupItem } from "svelte-materialify";
 
+  export let meta;
+
   let stimmen = "erststimmen";
   let selected = null;
 
@@ -82,14 +84,11 @@
 
   // style for Wahlkreise
   function style(feature) {
-    let colors = {
-      "CDU/CSU": "black",
-      GRÜNE: "green",
-      FDP: "yellow",
-      AfD: "blue",
-      SPD: "red",
-      "DIE LINKE.": "magenta",
-    };
+    //convert
+    let colors = {};
+    for (let i = 0; i < meta.length; i++) {
+      colors[meta[i].partei_id] = meta[i].color;
+    }
 
     let wkr = feature.properties.WKR_NR;
 

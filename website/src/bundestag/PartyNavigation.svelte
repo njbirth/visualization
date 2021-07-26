@@ -8,7 +8,10 @@
     ListItem,
     ListItemGroup,
   } from "svelte-materialify";
-  import { mdiCheckboxMultipleBlank, mdiCheckboxMultipleBlankOutline, mdiCheckboxMultipleMarked, mdiPen } from "@mdi/js";
+  import {
+    mdiCheckboxMultipleBlankOutline,
+    mdiCheckboxMultipleMarked,
+  } from "@mdi/js";
   const dispatcher = createEventDispatcher();
 
   export let meta;

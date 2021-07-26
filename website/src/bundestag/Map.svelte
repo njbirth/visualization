@@ -35,18 +35,18 @@
   // info panel to show vote data
   let info = L.control();
 
-  info.onAdd = () => {
+  info.onAdd = function (map) {
     this._div = L.DomUtil.create("div", "info");
     this.update();
     return this._div;
   };
 
-  info.update = (feature) => {
+  info.update = function (feature) {
     if (feature == null)
       this._div.innerHTML =
         "<b>Bundesgebiet</b><hr>Klicke auf einen Wahlkreis.";
     else {
-      let data = wahlkreise_stimmen.find((elem) => {
+      let data = wahlkreise_stimmen.find(function (elem) {
         return elem.nr == feature.properties.WKR_NR;
       });
       let votes = data[stimmen];
@@ -93,11 +93,11 @@
 
     let wkr = feature.properties.WKR_NR;
 
-    let data = wahlkreise_stimmen.find((elem) => {
+    let data = wahlkreise_stimmen.find(function (elem) {
       return elem.nr == wkr;
     });
 
-    let most = Object.keys(data[stimmen]).reduce((a, b) => {
+    let most = Object.keys(data[stimmen]).reduce(function (a, b) {
       return data[stimmen][a] > data[stimmen][b] ? a : b;
     });
 

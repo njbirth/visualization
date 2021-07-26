@@ -165,7 +165,7 @@
   <Router>
     <Route path="/*?profileID">
       <div>
-        <Profile {data} />
+        <Profile {data} {votes} />
       </div>
     </Route>
   </Router>

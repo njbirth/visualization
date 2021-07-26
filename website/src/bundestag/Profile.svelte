@@ -1,20 +1,33 @@
 <script>
-  import { mdiCloseCircle } from "@mdi/js";
+  import {
+    mdiArrowCollapseAll,
+    mdiArrowExpandAll,
+    mdiCardAccountDetails,
+    mdiClipboardCheck,
+    mdiClipboardOff,
+    mdiClipboardRemove,
+    mdiWindowClose,
+  } from "@mdi/js";
 
   import {
     AppBar,
     Button,
+    Col,
     Dialog,
     ExpansionPanel,
     ExpansionPanels,
     Icon,
     List,
     ListItem,
+    Row,
+    Tooltip,
   } from "svelte-materialify";
   import { navigate, useLocation } from "svelte-navigator";
   import { filterRoute } from "./Route";
 
   export let data;
+  export let votes;
+
   let location;
   $: location = useLocation();
   let active;
@@ -29,15 +42,16 @@
   }
 
   let wahlperioden;
-  let value = [0, 1];
+  let value = [0, 1, 2];
   let valueWP = [0];
   $: if (person !== null && person !== undefined) {
     wahlperioden = person.wahlperioden.reverse();
   }
 
   function onClose() {
-    value = [0, 1];
+    value = [0, 1, 2];
     valueWP = [0];
+    fullscreen = false;
     navigate(-1);
   }
 
@@ -46,11 +60,58 @@
       if (active) onClose();
     }
   }
+
+  let mappedVotes = votes.flatMap((vote) =>
+    vote.votes.map((v) => {
+      return {
+        nachname: v.name,
+        vorname: v.vorname,
+        vote: v.vote,
+        partei_id: v.partei_id,
+        meta: {
+          short: vote.short,
+          title: vote.title,
+          desc: vote.desc,
+          documents: vote.documents,
+          date: vote.date,
+        },
+      };
+    })
+  );
+  let personalVotes = [];
+  $: if (person !== null && person !== undefined) {
+    personalVotes = mappedVotes.filter(
+      (v) => v.nachname == person.nachname && v.vorname == person.vorname
+    );
+  }
+
+  function voteType(vote) {
+    switch (vote) {
+      case 0:
+        return "ja";
+      case 1:
+        return "nein";
+      case 2:
+        return "enthalten";
+      case 3:
+        return "ungültig";
+      case 4:
+        return "nicht abgegeben";
+      default:
+        return "nicht definiert";
+    }
+  }
+
+  let fullscreen = false;
+  function onToggleFullscreen() {
+    fullscreen = !fullscreen;
+  }
 </script>
 
 <svelte:window on:keydown={handleWindowKeyDown} />
 
 <Dialog
+  {fullscreen}
   {active}
   width="1024px"
   on:outroend={() => {
@@ -67,17 +128,29 @@
       >
       <div style="flex-grow:1" />
       <div>
+        <Button icon on:click={() => onToggleFullscreen()}>
+          {#if !fullscreen}
+            <Icon path={mdiArrowExpandAll} />
+          {:else}
+            <Icon path={mdiArrowCollapseAll} />
+          {/if}
+        </Button>
         <Button icon on:click={() => onClose()}>
-          <Icon path={mdiCloseCircle} />
+          <Icon path={mdiWindowClose} />
         </Button>
       </div>
     </AppBar>
-    <div style="display: inline-flex; width: 100%; max-height: 800px">
+    <div
+      style="display: inline-flex; width: 100%; {fullscreen
+        ? 'max-height: 92vh;'
+        : 'max-height: 800px;'}"
+    >
       <div style="width:70%; margin: 1rem;overflow-y: auto;">
         <ExpansionPanels multiple flat bind:value>
           <ExpansionPanel>
-            <span slot="header"
-              ><p style="font-size: 12pt; font-weight: bold;">
+            <span slot="header">
+              <p style="font-size: 12pt; font-weight: bold;">
+                <Icon path={mdiCardAccountDetails} />
                 Lebenslauf
               </p></span
             >
@@ -124,6 +197,42 @@
                 </ExpansionPanel>
               {/each}
             </ExpansionPanels>
+          </ExpansionPanel>
+          <ExpansionPanel>
+            <span slot="header"
+              ><p style="font-size: 12pt; font-weight: bold;">
+                Abstimmungen 19. Legislaturperiode
+              </p></span
+            >
+            <Row noGutters>
+              {#each personalVotes as vote}
+                <Col cols={12} sm={6} md={6}>
+                  <Tooltip bottom>
+                    <span slot="tip">{voteType(vote.vote)}</span>
+                    <ListItem
+                      on:click={() =>
+                        navigate(
+                          "/visualization/votes/" + filterRoute(vote.meta.short)
+                        )}
+                      ><span slot="prepend">
+                        {#if vote.vote == 0}
+                          <Icon
+                            path={mdiClipboardCheck}
+                            style="color: green;"
+                          />
+                        {:else if vote.vote == 1}
+                          <Icon path={mdiClipboardRemove} style="color: red;" />
+                        {:else}
+                          <Icon path={mdiClipboardOff} />
+                        {/if}
+                      </span>{vote.meta.short}<span slot="subtitle"
+                        >{vote.meta.date}</span
+                      ></ListItem
+                    ></Tooltip
+                  >
+                </Col>
+              {/each}
+            </Row>
           </ExpansionPanel>
         </ExpansionPanels>
       </div>

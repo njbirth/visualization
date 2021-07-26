@@ -28,15 +28,15 @@
   const path = resolve($location.pathname);
 
   onMount(() => {
-    if (!(votes == undefined || votes.length == 0))
-      navigate(
-        path + "/" + filterRoute(votes[value].short.split(" ").join(""))
-      );
+    if (!(votes == undefined || votes.length == 0)) {
+      if (!resolve($location.pathname).includes("/visualization/votes/"))
+        navigate(path + "/" + filterRoute(votes[value].short));
+    }
   });
 </script>
 
 {#each votes as vote}
-  <Route path={filterRoute(vote.short.split(" ").join(""))}>
+  <Route path={filterRoute(vote.short)}>
     <div style="width: 50%; margin: 1em;">
       <Card flat={true}
         ><CardTitle>{vote.title}</CardTitle><CardSubtitle
@@ -54,7 +54,7 @@
                   on:click={() =>
                     navigate(
                       filterRoute(
-                        vote.short.split(" ").join("") +
+                        vote.short +
                           "?profileID=" +
                           person.name +
                           " " +
@@ -77,7 +77,7 @@
                   on:click={() =>
                     navigate(
                       filterRoute(
-                        vote.short.split(" ").join("") +
+                        vote.short +
                           "?profileID=" +
                           person.name +
                           " " +

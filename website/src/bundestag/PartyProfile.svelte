@@ -13,21 +13,30 @@
   <Row noGutters>
     <Col cols={12} sm={6} md={8}>
       <CardText>
-        <b>Parteivorsitz: </b>{#each profile.parteivorsitzende as p, i}
-          {p}{i == profile.parteivorsitzende.length - 1 ? "" : ", "}
-        {/each}<br />
+        <b>Parteivorsitz: </b>
+        <ul>
+          {#each profile.parteivorsitzende as p, i}
+            <li>{p}{i == profile.parteivorsitzende.length - 1 ? "" : ", "}</li>
+          {/each}
+        </ul>
         {#if profile.generalsekretaer != null}
           <b>General­sekretär: </b>{profile.generalsekretaer}<br />
         {/if}
-        <b>stellv. Parteivorsitz: </b>{#each profile.stellvvorsitzende as p, i}
-          {p}{i == profile.stellvvorsitzende.length - 1 ? "" : ", "}
-        {/each}<br />
+        <b>stellv. Parteivorsitz: </b>
+        <ul>
+          {#each profile.stellvvorsitzende as p}
+            <li>{p}</li>
+          {/each}
+        </ul>
         <b>Anzahl Abgeordnete: </b>{mpNum} (Stand: 12.03.2021)<br />
-        <b
-          >Gründung:
-        </b>{#each profile.gruendung as gruendung}{gruendung}{/each}<br />
-        <b>Gründungsort: </b>{#each profile.gruendungsort as ort}{ort}{/each}<br
-        />
+        <b>Gründung: </b>
+        <ul>
+          {#each profile.gruendung as gruendung}<li>{gruendung}</li>{/each}
+        </ul>
+        <b>Gründungsort: </b>
+        <ul>
+          {#each profile.gruendungsort as ort}<li>{ort}</li>{/each}
+        </ul>
         <b>Mitgliederzahl: </b>{profile.mitgliederzahl}<br />
       </CardText>
     </Col>

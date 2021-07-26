@@ -16,7 +16,7 @@ jobs:
         run: |
           cd website
           npm install
-          npm run build
+          NODE_OPTIONS=--max_old_space_size=4096 npm run build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:

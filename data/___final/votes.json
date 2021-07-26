@@ -12794,8 +12794,8 @@
         "short": "Bundesnaturschutzgesetzes",
         "title": "Änderung des Bundesnaturschutzgesetzes",
         "desc": "Gesetzentwurf der Bundesregierung\n\nEntwurf eines Dritten Gesetzes zur Änderung des Bundesnaturschutzgesetzes",
-        "documents": [],
-        "date": "10.06.2021",
+        "documents": ["https://dserver.bundestag.de/btd/19/281/1928182.pdf", "https://dserver.bundestag.de/btd/19/307/1930713.pdf"],
+        "date": "24.06.2021",
         "votes": [
             {
                 "partei_id": "CDU/CSU",
@@ -17057,8 +17057,8 @@
         "short": "geschlechtergerechte Sprache",
         "title": "Verwendung geschlechtergerechter Sprache",
         "desc": "Antrag der Abgeordneten Stephan Brandner, Dr. Heiko Heßenkemper, Nicole Höchst, weiterer Abgeordneter und der Fraktion der AfD\n\nKeine Verwendung der sogenannten gendergerechten Sprache durch die Bundesregierung",
-        "documents": [],
-        "date": "10.06.2021",
+        "documents": ["https://dserver.bundestag.de/btd/19/309/1930964.pdf"],
+        "date": "24.06.2021",
         "votes": [
             {
                 "partei_id": "CDU/CSU",

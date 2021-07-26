@@ -148,7 +148,6 @@
         ></span
       >
     </div>
-    <p style="color: #999;font-size: 11pt;">Stand: 12.03.2021</p>
   </div>
 </div>
 

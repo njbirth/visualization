@@ -9,6 +9,7 @@
     Divider,
     MaterialApp,
     AppBar,
+    Dialog
   } from "svelte-materialify";
   import { mdiChartBar, mdiAccountBoxMultiple } from "@mdi/js";
   import metaJson from "../../data/___final/meta.json";
@@ -19,6 +20,7 @@
   import PartyNavigation from "./bundestag/PartyNavigation.svelte";
   import VoteNavigation from "./bundestag/VoteNavigation.svelte";
   import Profile from "./bundestag/Profile.svelte";
+  import Acknowledgements from "./Acknowledgements.svelte";
   import { onMount } from "svelte";
 
   export let basepath = "";
@@ -65,6 +67,8 @@
   onMount(() => {
     navigate(basepath + "/parties");
   });
+
+  let sourcesActive = false;
 </script>
 
 <MaterialApp {theme}>
@@ -149,6 +153,9 @@
             <VoteNavigation {votes} /></Route
           >
         </Router>
+        <div style="margin-left: 25px; margin-top: 5px">
+          <a style="color: #999;font-size: 11pt;text-decoration: underline;" href="#" on:click={function() { sourcesActive = true; }}>Quellen und Lizenzen</a>
+        </div>
       </NavigationDrawer>
     </div>
     <div style="display: flex; width: 100%">
@@ -169,4 +176,7 @@
       </div>
     </Route>
   </Router>
+  <Dialog bind:active={sourcesActive} width="900">
+    <Acknowledgements />
+  </Dialog>
 </MaterialApp>

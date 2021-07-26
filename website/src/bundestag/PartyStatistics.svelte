@@ -73,10 +73,15 @@
     options={charts["seat-distribution"].options}
   />
   <Dialog bind:active={mapActive} width="1000">
-    <Map />
+    <Map {meta} />
   </Dialog>
   <div style="margin: 20px">
-    <Button size="small" on:click={function() { mapActive = true; }}>Stimmenverteilung nach Wahlkreisen</Button>
+    <Button
+      size="small"
+      on:click={function () {
+        mapActive = true;
+      }}>Stimmenverteilung nach Wahlkreisen</Button
+    >
   </div>
 {:else if type == "age-distribution"}
   <ViolinPlot

@@ -123,7 +123,7 @@
         >
       {/each}
     </ListItemGroup>
-    <div class="text-center" style="margin-top: 1em;">
+    <div class="text-center" style="margin-top: 0.2em;">
       <span>
         <Button
           outlined
@@ -147,6 +147,9 @@
           Keine</Button
         ></span
       >
+    </div>
+    <div style="font-size: 11pt; border: 1px solid; padding: 3px; margin-left: 5px; margin-right: 5px">
+      Doppelklicken, um eine einzelne Partei auszuwählen und das Parteiprofil anzuzeigen.
     </div>
   </div>
 </div>

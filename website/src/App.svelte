@@ -153,7 +153,7 @@
             <VoteNavigation {votes} /></Route
           >
         </Router>
-        <div style="margin-left: 25px; margin-top: 5px">
+        <div style="margin-left: 20px; margin-top: 20px">
           <a style="color: #999;font-size: 11pt;text-decoration: underline;" href="#" on:click={function() { sourcesActive = true; }}>Quellen und Lizenzen</a>
         </div>
       </NavigationDrawer>

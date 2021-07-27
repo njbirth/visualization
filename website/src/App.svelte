@@ -72,7 +72,7 @@
 </script>
 
 <MaterialApp {theme}>
-  <AppBar>Bundestag</AppBar>
+  <AppBar>Informationen und Visualisierungen zum 19. Bundestag</AppBar>
   <div style="display: flex;">
     <div>
       <NavigationDrawer>

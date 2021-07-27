@@ -130,7 +130,7 @@
 </Card>
 <Divider vertical={true} />
 <Card style="width: 50%; margin: 1em;" flat={true}>
-  <CardTitle>Statistiken</CardTitle>
+  <CardTitle>Statistik</CardTitle>
   <Tabs centerActive>
     <div slot="tabs">
       {#each statistics as statistic}

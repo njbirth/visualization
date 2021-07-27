@@ -32,6 +32,16 @@
         },
       },
     },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label;
+            return label + ": " + context.dataset.data[0].toFixed(2) + "%";
+          },
+        },
+      },
+    },
   };
 
   onMount(async () => {
@@ -44,4 +54,4 @@
   });
 </script>
 
-<canvas height="50px" bind:this={chartCanvas} />
+<canvas min-height="50px" height="65px" bind:this={chartCanvas} />

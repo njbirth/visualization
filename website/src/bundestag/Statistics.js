@@ -179,8 +179,8 @@ export function chartDataGender(meta, data) {
   };
 }
 
-export function chartOptionsGender(relative=false) {
-  return {
+export function chartOptionsGender(relative = false) {
+  let options = {
     legend: {
       display: true,
     },
@@ -216,6 +216,22 @@ export function chartOptionsGender(relative=false) {
       ],
     },
   };
+  if (relative)
+    options["tooltips"] = {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return (
+            data.datasets[tooltipItem.datasetIndex].label +
+            ": " +
+            data.datasets[tooltipItem.datasetIndex].data[
+              tooltipItem.index
+            ].toFixed(2) +
+            "%"
+          );
+        },
+      },
+    };
+  return options;
 }
 
 export function chartDataGenderRelative(meta, data) {

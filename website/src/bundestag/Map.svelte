@@ -44,37 +44,46 @@
   };
 
   info.update = function (feature) {
-    if (feature == null)
-      this._div.innerHTML =
-        "<b>Bundesgebiet</b><hr>Klicke auf einen Wahlkreis.";
-    else {
-      let data = wahlkreise_stimmen.find(function (elem) {
-        return elem.nr == feature.properties.WKR_NR;
-      });
-      let votes = data[stimmen];
-      let votes_list = [];
-      for (let key in votes) votes_list.push([votes[key], key]);
-      votes_list = votes_list.sort((a, b) => {
-        return b[0] - a[0];
-      });
-      let all_votes = data[stimmen + "_gültig"];
-      let content = "<b>" + feature.properties.WKR_NAME + "</b><hr>";
-      content += "<table>";
-      for (let vote in votes_list) {
-        vote = votes_list[vote];
-        content +=
-          "<tr><td>" +
-          vote[1] +
-          "&nbsp;&nbsp;&nbsp;</td><td>" +
-          ((vote[0] / all_votes) * 100).toFixed(2) +
-          "%</td><td>(" +
-          vote[0].toLocaleString() +
-          ")</td></tr>";
-      }
-      content += "</table>";
-      this._div.innerHTML = content;
+    if (feature == null) {
+      this._div.innerHTML = "<b>Bundesgebiet</b><hr style=\"margin-top: 7px;margin-bottom: 7px;\">";
+      this._div.innerHTML += getVotesTable(1000);
+      this._div.innerHTML += "<hr style=\"margin-top: 7px;margin-bottom: 7px;\">Wahlkreis auswählen, um weitere Informationen zu erhalten";
+    }
+    else {   
+      this._div.innerHTML = "<b>" + feature.properties.WKR_NAME + "</b><hr style=\"margin-top: 7px;margin-bottom: 7px;\">";
+      this._div.innerHTML += getVotesTable(feature.properties.WKR_NR);
     }
   };
+
+  // Auxiliary function
+  function getVotesTable(wkrNr) {
+    let data = wahlkreise_stimmen.find(function (elem) {
+      return elem.nr == wkrNr;
+    });
+    let votes = data[stimmen];
+    let votes_list = [];
+    for (let key in votes) votes_list.push([votes[key], key]);
+    votes_list = votes_list.sort((a, b) => {
+      return b[0] - a[0];
+    });
+    let all_votes = data[stimmen + "_gültig"];
+
+    let content = "<table>";
+    for (let vote in votes_list) {
+      vote = votes_list[vote];
+      content +=
+        "<tr><td>" +
+        vote[1] +
+        "&nbsp;&nbsp;&nbsp;&nbsp;</td><td>" +
+        ((vote[0] / all_votes) * 100).toFixed(2) +
+        "%</td><td>&nbsp;&nbsp;&nbsp;&nbsp;(" +
+        vote[0].toLocaleString() +
+        ")</td></tr>";
+    }
+    content += "</table>";
+
+    return content;
+  }
 
   // Just reload everything (used when toggling between Erstimmen and Zweitstimmen)
   function updateView() {
@@ -106,7 +115,7 @@
       opacity: 1,
       color: "white",
       fillOpacity:
-        selected != null && wkr == selected.properties.WKR_NR ? 1.0 : 0.6,
+        selected != null && wkr == selected.properties.WKR_NR ? 1.0 : 0.8,
     };
   }
 
@@ -118,7 +127,7 @@
       click: selectWkr,
     });
 
-    layer.bindTooltip(feature.properties.WKR_NAME, {
+    layer.bindTooltip("<div style=\"font-size: 11pt\">" + feature.properties.WKR_NAME + "</div", {
       direction: "left",
       offset: [-20, 0],
       sticky: true,
@@ -170,5 +179,5 @@
 
 <div
   bind:this={component}
-  style="width: 900px; height: 620px; background: #fff;"
+  style="width: 1000px; height: 620px; background: #fff;"
 />

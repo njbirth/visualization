@@ -1,37 +1,51 @@
 {
+	"20210624_1": {
+		"short": "Bundes-Klimaschutzgesetz",
+		"title": "Änderung des Bundes-Klimaschutzgesetzes",
+		"desc": "Gesetzentwurf der Bundesregierung. Entwurf eines Ersten Gesetzes zur Änderung des Bundes-Klimaschutzgesetzes",
+		"documents": ["https://dserver.bundestag.de/btd/19/302/1930230.pdf", "https://dserver.bundestag.de/btd/19/309/1930949.pdf"],
+		"date": "24.06.2021"
+	},
+	"20210624_2": {
+		"short": "Bundesnaturschutzgesetz",
+		"title": "Änderung des Bundesnaturschutzgesetzes",
+		"desc": "Gesetzentwurf der Bundesregierung. Entwurf eines Dritten Gesetzes zur Änderung des Bundesnaturschutzgesetzes",
+		"documents": ["https://dserver.bundestag.de/btd/19/281/1928182.pdf", "https://dserver.bundestag.de/btd/19/307/1930713.pdf"],
+		"date": "24.06.2021"
+	},
+	"20210624_4": {
+		"short": "geschlechtergerechte Sprache",
+		"title": "Verwendung geschlechtergerechter Sprache",
+		"desc": "Antrag der Abgeordneten Stephan Brandner, Dr. Heiko Heßenkemper, Nicole Höchst, weiterer Abgeordneter und der Fraktion der AfD. Keine Verwendung der sogenannten gendergerechten Sprache durch die Bundesregierung",
+		"documents": ["https://dserver.bundestag.de/btd/19/309/1930964.pdf"],
+		"date": "24.06.2021"
+	},
+	"20210610_4": {
+		"short": "Vermögensteuergesetz",
+		"title": "Änderung des Vermögensteuergesetzes (VStG)",
+		"desc": "Gesetzentwurf der Abgeordneten Markus Herbrand, Christian Dürr, Dr. Florian Toncar, weiterer Abgeordneter und der Fraktion der FDP. Enwurf eines Gesetzes zur Änderung des Vermögensteuergesetzes (VStG)",
+		"documents": ["https://dserver.bundestag.de/btd/19/257/1925789.pdf"],
+		"date": "10.06.2021"
+	},
+	"20210325_2": {
+		"short": "BND-Gesetz",
+		"title": "BND-Gesetz, Kontrolle der Nachrichtendienste",
+		"desc": "Gesetzentwurf der Abgeordneten Benjamin Strasser, Stephan Thomae, Grigorios Aggelidis, weiterer Abgeordneter und der Fraktion der FDP. Entwurf eines Gesetzes zur Stärkung der parlamentarischen Kontrolle der Nachrichtendienste",
+		"documents": ["https://dserver.bundestag.de/btd/19/195/1919502.pdf", "https://dserver.bundestag.de/btd/19/278/1927811.pdf"],
+		"date": "25.03.2021"
+	},
+	"20210225_2": {
+		"short": "Indymedia",
+		"title": "Verein Indymedia verbieten (Beschlussempfehlung)",
+		"desc": "Beschlussempfehlung des Ausschusses für Inneres und Heimat (4. Ausschuss) zu dem Antrag der Abgeordneten Beatrix von Storch, Dr. Gottfried Curio, Dr. Bernd Baumann, weiterer Abgeordneter und der Fraktion der AfD. Verein Indymedia verbieten",
+		"documents": ["https://dserver.bundestag.de/btd/19/206/1920682.pdf", "https://dserver.bundestag.de/btd/19/241/1924123.pdf"],
+		"date": "25.02.2021"
+	},
 	"20191220_2": {
 		"short": "Bewaffnete Drohnen",
 		"title": "Keine Anschaffung, sondern Ächtung bewaffneter Drohnen",
 		"desc": "Antrag der Abgeordneten Tobias Pflüger, Andrej Hunko, Heike Hänsel, weiterer Abgeordneter und der Fraktion DIE LINKE.",
 		"documents": ["https://dserver.bundestag.de/btd/19/160/1916041.pdf"],
 		"date": "20.12.2019"
-	},
-	"20210610_4": {
-		"short": "Vermögensteuergesetz",
-		"title": "Änderung des Vermögensteuergesetzes (VStG)",
-		"desc": "Gesetzentwurf der Abgeordneten Markus Herbrand, Christian Dürr, Dr. Florian Toncar, weiterer Abgeordneter und der Fraktion der FDP\n\nEnwurf eines Gesetzes zur Änderung des Vermögensteuergesetzes (VStG)",
-		"documents": [],
-		"date": "10.06.2021"
-	},
-	"20210624_1": {
-		"short": "Bundes-Klimaschutzgesetz",
-		"title": "Änderung des Bundes-Klimaschutzgesetzes",
-		"desc": "Gesetzentwurf der Bundesregierung\n\nEntwurf eines Ersten Gesetzes zur Änderung des Bundes-Klimaschutzgesetzes",
-		"documents": [],
-		"date": "10.06.2021"
-	},
-	"20210624_2": {
-		"short": "Bundesnaturschutzgesetz",
-		"title": "Änderung des Bundesnaturschutzgesetzes",
-		"desc": "Gesetzentwurf der Bundesregierung\n\nEntwurf eines Dritten Gesetzes zur Änderung des Bundesnaturschutzgesetzes",
-		"documents": [],
-		"date": "10.06.2021"
-	},
-	"20210624_4": {
-		"short": "geschlechtergerechte Sprache",
-		"title": "Verwendung geschlechtergerechter Sprache",
-		"desc": "Antrag der Abgeordneten Stephan Brandner, Dr. Heiko Heßenkemper, Nicole Höchst, weiterer Abgeordneter und der Fraktion der AfD\n\nKeine Verwendung der sogenannten gendergerechten Sprache durch die Bundesregierung",
-		"documents": [],
-		"date": "10.06.2021"
 	}
 }

@@ -8071,5 +8071,32 @@
             "FDP": 11096,
             "AfD": 16745
         }
+    },
+    {
+        "erststimmen_ungültig": 586726,
+        "erststimmen_gültig": 46389615,
+        "zweitstimmen_ungültig": 460849,
+        "zweitstimmen_gültig": 46515492,
+        "nr": 1000,
+        "gebiet": "Bundesgebiet",
+        "gehört_zu": -1,
+        "wahlberechtigte": 61688485,
+        "wähler": 46976341,
+        "erststimmen": {
+            "CDU/CSU": 17286238,
+            "SPD": 11429231,
+            "GRÜNE": 3717922.0,
+            "DIE LINKE.": 3966637.0,
+            "FDP": 3249238,
+            "AfD": 5317499.0
+        },
+        "zweitstimmen": {
+            "CDU/CSU": 15317344,
+            "SPD": 9539381,
+            "GRÜNE": 4158400,
+            "DIE LINKE.": 4297270,
+            "FDP": 4999449,
+            "AfD": 5878115
+        }
     }
 ]

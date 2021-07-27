@@ -125,11 +125,11 @@
       </div>
     </AppBar>
     <div
-      style="display: inline-flex; width: 100%; {fullscreen
+      style="display: inline-flex; width: 100%; overflow-y: auto; {fullscreen
         ? 'max-height: 92vh;'
         : 'max-height: 800px;'}"
     >
-      <div style="width:70%; margin: 1rem;overflow-y: auto;">
+      <div style="width:70%; margin: 1rem;">
         <ExpansionPanels multiple flat bind:value>
           <ExpansionPanel>
             <span slot="header">
@@ -225,7 +225,7 @@
         <div>
           <img alt="{person.nachname}, {person.vorname}" src={person.img} />
         </div>
-        <div style="overflow-y: auto; max-height: 390px">
+        <div>
           <List>
             {#if person.geburtsdatum !== null}
               <ListItem disabled

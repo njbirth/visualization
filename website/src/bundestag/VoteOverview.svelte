@@ -132,7 +132,7 @@
     </div>
     <Divider vertical={true} />
     <Card style="width: 50%; margin: 1em;" flat={true}
-      ><CardTitle>Statistik</CardTitle>
+      ><CardTitle>Ergebnisse</CardTitle>
       <VoteBar data={vote.votes} {meta} />
     </Card>
   </Route>

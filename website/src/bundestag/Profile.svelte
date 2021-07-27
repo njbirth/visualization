@@ -127,7 +127,7 @@
     <div
       style="display: inline-flex; width: 100%; overflow-y: auto; {fullscreen
         ? 'max-height: 92vh;'
-        : 'max-height: 800px;'}"
+        : 'max-height: 720px;'}"
     >
       <div style="width:70%; margin: 1rem;">
         <ExpansionPanels multiple flat bind:value>

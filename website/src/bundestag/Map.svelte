@@ -287,22 +287,24 @@
 
 {#if partei != "alle"}
   <div style="display: inline-flex; font-size: 10pt; width:100%; margin-bottom: 16px;">
-    <span style="width: 9%; text-align: right; margin-right: 1%;">0%</span>
+    <span style="width: 14%; text-align: right; margin-right: 1%;">0%</span>
     <div
       class="color-ramp"
-      style="background-image: linear-gradient(to right, {'white'}, {meta.find(
+      style="background-image: linear-gradient(to right, white, {meta.find(
         (p) => partei === p.partei_id
       ).color}); opacity: 0.8"
     />
-    <span style="width:9%; text-align: left; margin-left: 1%;"
+    <span style="width:14%; text-align: left; margin-left: 1%;"
       >{(max_frac[stimmen][partei] * 100).toFixed(1)}%</span
     >
   </div>
+  {:else}
+  <div style="height: 41px" />
 {/if}
 
 <style>
   .color-ramp {
     height: 24px;
-    width: 80%;
+    width: 70%;
   }
 </style>

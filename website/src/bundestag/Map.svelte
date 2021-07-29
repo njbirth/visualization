@@ -11,40 +11,41 @@
   let partei = "alle";
   let selected = null;
 
-  
   // Calculate the best result for each party
   let max_frac = {
-    "erststimmen": {
+    erststimmen: {
       "CDU/CSU": 0,
-      "SPD": 0,
-      "AfD": 0,
-      "FDP": 0,
+      SPD: 0,
+      AfD: 0,
+      FDP: 0,
       "DIE LINKE.": 0,
-      "GRÜNE": 0
+      GRÜNE: 0,
     },
-      "zweitstimmen": {
+    zweitstimmen: {
       "CDU/CSU": 0,
-      "SPD": 0,
-      "AfD": 0,
-      "FDP": 0,
+      SPD: 0,
+      AfD: 0,
+      FDP: 0,
       "DIE LINKE.": 0,
-      "GRÜNE": 0
-    }
-  }
+      GRÜNE: 0,
+    },
+  };
 
-  for(let i in wahlkreise_stimmen) {
+  for (let i in wahlkreise_stimmen) {
     let kreis = wahlkreise_stimmen[i];
     let parteinamen = ["CDU/CSU", "SPD", "AfD", "FDP", "DIE LINKE.", "GRÜNE"];
 
-    for(let j in parteinamen) {
+    for (let j in parteinamen) {
       let parteiname = parteinamen[j];
 
-      let frac_erststimmen = kreis["erststimmen"][parteiname] / kreis["erststimmen_gültig"];
-      if(frac_erststimmen > max_frac["erststimmen"][parteiname])
+      let frac_erststimmen =
+        kreis["erststimmen"][parteiname] / kreis["erststimmen_gültig"];
+      if (frac_erststimmen > max_frac["erststimmen"][parteiname])
         max_frac["erststimmen"][parteiname] = frac_erststimmen;
 
-      let frac_zweitstimmen = kreis["zweitstimmen"][parteiname] / kreis["zweitstimmen_gültig"];
-      if(frac_zweitstimmen > max_frac["zweitstimmen"][parteiname])
+      let frac_zweitstimmen =
+        kreis["zweitstimmen"][parteiname] / kreis["zweitstimmen_gültig"];
+      if (frac_zweitstimmen > max_frac["zweitstimmen"][parteiname])
         max_frac["zweitstimmen"][parteiname] = frac_zweitstimmen;
     }
   }
@@ -84,12 +85,16 @@
 
   info.update = function (feature) {
     if (feature == null) {
-      this._div.innerHTML = "<b>Bundesgebiet</b><hr style=\"margin-top: 7px;margin-bottom: 7px;\">";
+      this._div.innerHTML =
+        '<b>Bundesgebiet</b><hr style="margin-top: 7px;margin-bottom: 7px;">';
       this._div.innerHTML += getVotesTable(1000);
-      this._div.innerHTML += "<hr style=\"margin-top: 7px;margin-bottom: 7px;\">Wahlkreis auswählen, um weitere Informationen zu erhalten";
-    }
-    else {   
-      this._div.innerHTML = "<b>" + feature.properties.WKR_NAME + "</b><hr style=\"margin-top: 7px;margin-bottom: 7px;\">";
+      this._div.innerHTML +=
+        '<hr style="margin-top: 7px;margin-bottom: 7px;">Wahlkreis auswählen, um weitere Informationen zu erhalten';
+    } else {
+      this._div.innerHTML =
+        "<b>" +
+        feature.properties.WKR_NAME +
+        '</b><hr style="margin-top: 7px;margin-bottom: 7px;">';
       this._div.innerHTML += getVotesTable(feature.properties.WKR_NR);
     }
   };
@@ -117,12 +122,14 @@
         (partei == vote[1] ? "</b>" : "") +
         "&nbsp;&nbsp;&nbsp;&nbsp;</td><td>" +
         (partei == vote[1] ? "<b>" : "") +
-        ((vote[0] / all_votes) * 100).toFixed(2) + "%" +
+        ((vote[0] / all_votes) * 100).toFixed(2) +
+        "%" +
         (partei == vote[1] ? "<b>" : "") +
-        "</td><td>" + 
+        "</td><td>" +
         (partei == vote[1] ? "<b>" : "") +
         "&nbsp;&nbsp;&nbsp;&nbsp;(" +
-        vote[0].toLocaleString() + ")" +
+        vote[0].toLocaleString() +
+        ")" +
         (partei == vote[1] ? "</b>" : "") +
         "</td></tr>";
     }
@@ -152,17 +159,20 @@
     });
 
     let color, opacity;
-    if(partei == "alle") {
+    if (partei == "alle") {
       let most = Object.keys(data[stimmen]).reduce(function (a, b) {
         return data[stimmen][a] > data[stimmen][b] ? a : b;
       });
 
       color = colors[most];
       opacity = 0.8;
-    }
-    else {
+    } else {
       color = colors[partei];
-      opacity = 0.8 * (data[stimmen][partei] / data[stimmen + "_gültig"] / max_frac[stimmen][partei]);
+      opacity =
+        0.8 *
+        (data[stimmen][partei] /
+          data[stimmen + "_gültig"] /
+          max_frac[stimmen][partei]);
     }
 
     return {
@@ -183,11 +193,14 @@
       click: selectWkr,
     });
 
-    layer.bindTooltip("<div style=\"font-size: 11pt\">" + feature.properties.WKR_NAME + "</div", {
-      direction: "left",
-      offset: [-20, 0],
-      sticky: true,
-    });
+    layer.bindTooltip(
+      '<div style="font-size: 11pt">' + feature.properties.WKR_NAME + "</div",
+      {
+        direction: "left",
+        offset: [-20, 0],
+        sticky: true,
+      }
+    );
   }
 
   // Mouseover (in)
@@ -228,8 +241,12 @@
     bind:value={stimmen}
     on:change={updateView}
   >
-    <ButtonGroupItem class="button-group-item-size-small" value="erststimmen">Erststimmen</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="zweitstimmen">Zweitstimmen</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="erststimmen"
+      >Erststimmen</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="zweitstimmen"
+      >Zweitstimmen</ButtonGroupItem
+    >
   </ButtonGroup>
 
   <ButtonGroup
@@ -239,13 +256,27 @@
     on:change={updateView}
     style="margin-top: 0px"
   >
-    <ButtonGroupItem class="button-group-item-size-small" value="alle">alle</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="CDU/CSU">CDU/CSU</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="SPD">SPD</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="AfD">AfD</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="FDP">FDP</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="DIE LINKE.">DIE LINKE.</ButtonGroupItem>
-    <ButtonGroupItem class="button-group-item-size-small" value="GRÜNE">GRÜNE</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="alle"
+      >alle</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="CDU/CSU"
+      >CDU/CSU</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="SPD"
+      >SPD</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="AfD"
+      >AfD</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="FDP"
+      >FDP</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="DIE LINKE."
+      >DIE LINKE.</ButtonGroupItem
+    >
+    <ButtonGroupItem class="button-group-item-size-small" value="GRÜNE"
+      >GRÜNE</ButtonGroupItem
+    >
   </ButtonGroup>
 </div>
 

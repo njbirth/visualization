@@ -8,7 +8,46 @@
   export let meta;
 
   let stimmen = "erststimmen";
+  let partei = "alle";
   let selected = null;
+
+  
+  // Calculate the best result for each party
+  let max_frac = {
+    "erststimmen": {
+      "CDU/CSU": 0,
+      "SPD": 0,
+      "AfD": 0,
+      "FDP": 0,
+      "DIE LINKE.": 0,
+      "GRÜNE": 0
+    },
+      "zweitstimmen": {
+      "CDU/CSU": 0,
+      "SPD": 0,
+      "AfD": 0,
+      "FDP": 0,
+      "DIE LINKE.": 0,
+      "GRÜNE": 0
+    }
+  }
+
+  for(let i in wahlkreise_stimmen) {
+    let kreis = wahlkreise_stimmen[i];
+    let parteinamen = ["CDU/CSU", "SPD", "AfD", "FDP", "DIE LINKE.", "GRÜNE"];
+
+    for(let j in parteinamen) {
+      let parteiname = parteinamen[j];
+
+      let frac_erststimmen = kreis["erststimmen"][parteiname] / kreis["erststimmen_gültig"];
+      if(frac_erststimmen > max_frac["erststimmen"][parteiname])
+        max_frac["erststimmen"][parteiname] = frac_erststimmen;
+
+      let frac_zweitstimmen = kreis["zweitstimmen"][parteiname] / kreis["zweitstimmen_gültig"];
+      if(frac_zweitstimmen > max_frac["zweitstimmen"][parteiname])
+        max_frac["zweitstimmen"][parteiname] = frac_zweitstimmen;
+    }
+  }
 
   let geojson = L.geoJSON(wahlkreise, {
     style: style,
@@ -73,12 +112,19 @@
       vote = votes_list[vote];
       content +=
         "<tr><td>" +
+        (partei == vote[1] ? "<b>" : "") +
         vote[1] +
+        (partei == vote[1] ? "</b>" : "") +
         "&nbsp;&nbsp;&nbsp;&nbsp;</td><td>" +
-        ((vote[0] / all_votes) * 100).toFixed(2) +
-        "%</td><td>&nbsp;&nbsp;&nbsp;&nbsp;(" +
-        vote[0].toLocaleString() +
-        ")</td></tr>";
+        (partei == vote[1] ? "<b>" : "") +
+        ((vote[0] / all_votes) * 100).toFixed(2) + "%" +
+        (partei == vote[1] ? "<b>" : "") +
+        "</td><td>" + 
+        (partei == vote[1] ? "<b>" : "") +
+        "&nbsp;&nbsp;&nbsp;&nbsp;(" +
+        vote[0].toLocaleString() + ")" +
+        (partei == vote[1] ? "</b>" : "") +
+        "</td></tr>";
     }
     content += "</table>";
 
@@ -105,17 +151,27 @@
       return elem.nr == wkr;
     });
 
-    let most = Object.keys(data[stimmen]).reduce(function (a, b) {
-      return data[stimmen][a] > data[stimmen][b] ? a : b;
-    });
+    let color, opacity;
+    if(partei == "alle") {
+      let most = Object.keys(data[stimmen]).reduce(function (a, b) {
+        return data[stimmen][a] > data[stimmen][b] ? a : b;
+      });
+
+      color = colors[most];
+      opacity = 0.8;
+    }
+    else {
+      color = colors[partei];
+      opacity = 0.8 * (data[stimmen][partei] / data[stimmen + "_gültig"] / max_frac[stimmen][partei]);
+    }
 
     return {
-      fillColor: colors[most],
+      fillColor: color,
       weight: selected != null && wkr == selected.properties.WKR_NR ? 2.0 : 1.0,
       opacity: 1,
       color: "white",
       fillOpacity:
-        selected != null && wkr == selected.properties.WKR_NR ? 1.0 : 0.8,
+        selected != null && wkr == selected.properties.WKR_NR ? 1.0 : opacity,
     };
   }
 
@@ -172,8 +228,24 @@
     bind:value={stimmen}
     on:change={updateView}
   >
-    <ButtonGroupItem value="erststimmen">Erststimmen</ButtonGroupItem>
-    <ButtonGroupItem value="zweitstimmen">Zweitstimmen</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="erststimmen">Erststimmen</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="zweitstimmen">Zweitstimmen</ButtonGroupItem>
+  </ButtonGroup>
+
+  <ButtonGroup
+    mandatory
+    activeClass="blue white-text"
+    bind:value={partei}
+    on:change={updateView}
+    style="margin-top: 0px"
+  >
+    <ButtonGroupItem class="button-group-item-size-small" value="alle">alle</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="CDU/CSU">CDU/CSU</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="SPD">SPD</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="AfD">AfD</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="FDP">FDP</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="DIE LINKE.">DIE LINKE.</ButtonGroupItem>
+    <ButtonGroupItem class="button-group-item-size-small" value="GRÜNE">GRÜNE</ButtonGroupItem>
   </ButtonGroup>
 </div>
 
